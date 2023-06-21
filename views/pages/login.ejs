@@ -1,6 +1,22 @@
 <%- include("../partials/header"); %>
 
-
-
+<div id="log-in-container">
+    <div id="log-in-form-title-container">
+        <h1><b>Nyx</b></h1>
+    </div>
+    <div id="log-in-form-container">
+        <form action="/" method="post">
+            <div id="log-in-id-container" >
+                <input id="log-in-id" type="text" name="id" placeholder="Vartotojas">
+            </div>
+            <div id="log-in-psw-container" >
+                <input id="log-in-psw" type="password" name="password" placeholder="Slaptažodis">
+            </div>
+            <div id="log-in-button-container">
+                <input id="log-in-button" type="submit" class="btn btn-dark" value="Prisijungti">
+            </div>
+        </form>
+    </div>
+</div>
 
 <%- include("../partials/footer"); %>

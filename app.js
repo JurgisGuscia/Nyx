@@ -13,6 +13,11 @@ app.get("/", (req, res)=>{
     res.render("pages/login");
 });
 
+app.post("/", (req, res)=>{
+    //handle log in attempt
+    
+});
+
 app.listen(3000, (req, res)=>{
     console.log("server listening on port 3000");
 });

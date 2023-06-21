@@ -1,0 +1,68 @@
+:root{
+    --primary: #191919;
+    --secondary: #2D4263;
+    --contrast: #C84B31;
+    --compliment: #ECDBBA;
+}
+*{
+    font-family: sans-serif;
+}
+body {
+    display:flex;
+    justify-content: center;
+    height: 100vh;
+    align-items: center;
+}
+
+#log-in-container{
+    width: 400px;
+    height: 300px;
+    border-radius: 10px;
+    align-items: center;
+    justify-content: center;
+    border: solid var(--primary) 1px;
+}
+#log-in-form-title-container{
+    text-align: center;
+    margin-top:30px;
+    margin-bottom:15px;
+    width: 100%;
+}
+#log-in-form-container{
+    width: 100%;
+    text-align: center;
+    margin-top:25px;
+}
+
+#log-in-id-container{
+    width:100%;
+    margin-bottom: 10px;
+}
+#log-in-id{
+    border-radius: 5px;
+    margin-bottom: 10px;
+    width: 250px;
+    height: 35px;
+    padding-left:10px;
+    border: solid var(--primary) 1px;
+}   
+#log-in-psw-container{
+    width:100%;
+}
+#log-in-psw{
+    border-radius: 5px;
+    margin-bottom: 10px;
+    width: 250px;
+    height: 35px;
+    padding-left:10px;
+    border: solid var(--primary) 1px;
+}
+#log-in-button-container{
+    width: 100px;
+    margin:auto;
+    margin-top:10px;
+}
+#log-in-button{
+    width: 100%;
+    background-color: var(--primary);
+}
