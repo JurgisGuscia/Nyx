@@ -7,15 +7,15 @@
     <div id="register-form-container">
         <form action="/register" method="post">
             <div class="register-field-container">
-                <input class="register-field" type="email" name="email" placeholder="Elektroninis paštas" autocomplete="off" required>
+                <input class="register-field" type="email" name="username" placeholder="Elektroninis paštas" autocomplete="off" required>
             </div>
 
             <div class="register-field-container">
-                <input class="register-field" type="password" name="password1" placeholder="Slaptažodis" autocomplete="off" required>
+                <input  id="password1" class="register-field" type="password" name="password" oninput="check()" placeholder="Slaptažodis" autocomplete="off" required>
             </div>
 
             <div class="register-field-container">
-                <input class="register-field" type="password" name="password2" placeholder="Slaptažodis" autocomplete="off" required>
+                <input id="password2"class="register-field" type="password" name="password2" oninput="check()" placeholder="Slaptažodis" autocomplete="off" required>
             </div>
 
             <div class="register-field-container">
@@ -36,7 +36,7 @@
 
 
             <div id="register-button-container">
-                <input id="register-button" type="submit" class="btn btn-dark" value="Registruotis">
+                <input id="register-button" disabled="true" type="submit" class="btn btn-dark" value="Registruotis">
             </div>
         </form>
 
