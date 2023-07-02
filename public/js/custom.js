@@ -10,5 +10,13 @@ function check() {
   }
 
   $("#add-new-item-button").on("click", ()=>{
-    //shot add new item form
+    $("#back-drop").toggleClass("hidden");
+    $("#add-new-item-form-container").toggleClass("hidden");
+  });
+
+  $("#cancel-new-item-addition").on("click", ()=>{
+    document.getElementById("add-new-item-form").reset();
+    $("#back-drop").toggleClass("hidden");
+    $("#add-new-item-form-container").toggleClass("hidden");
+    
   });

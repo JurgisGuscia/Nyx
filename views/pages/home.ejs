@@ -1,4 +1,31 @@
 <%- include("../partials/header"); %>
+<div id="back-drop" class="hidden"></div>
+<div id="add-new-item-form-container" class="hidden">
+    <form id="add-new-item-form" action="/home" method="POST">
+        <div class="new-item-input-container"><input type="text" name="itemCode" placeholder="Kodas" required></div>
+        <div class="new-item-input-container"><input type="text" name="itemName" placeholder="Pavadinimas" required></div>
+        <div class="new-item-input-container"><input type="number" name="itemCount" placeholder="Kiekis" required></div>
+        <div  class="new-item-input-container">
+            <label id="boughIn-label" for="boughtIn">Pirkta:</label>
+            <select id="boughtIn" name="boughtIn" size="1" required>
+                <option value="" selected="selected"></option>
+                <option value="0">Internetu</option>
+                <option value="01">Jonavos g.</option>
+                <option value="80">Draugystė</option>
+                <option value="110">Mega</option>
+                <option value="260">Kaišiadorys</option>
+                <option value="999">Kita</option>
+            </select>
+        </div>
+        <div id="new-item-comment-area-container" class="new-item-input-container"><textarea id="new-item-comment-area" name="authorComment" placeholder="Komentaras (nebūtina)"></textarea></div>
+        
+    </form>
+    <div id="add-new-item-form-button-container">
+        <button id="add-new-item-form-button" form="add-new-item-form" class="btn btn-dark" type="submit">Pridėti</button>
+        <button id="cancel-new-item-addition" class="btn btn-light">Atšaukti</button>
+    </div>
+    
+</div>
 <div id="home-wrap-div">
     <div id="home-page-container">
         <div id="user-panel-container">
