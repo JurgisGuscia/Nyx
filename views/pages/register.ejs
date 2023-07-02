@@ -1,47 +1,47 @@
 <%- include("../partials/header"); %>
+<div id="artificial-body">
+    <div id="register-container">  
+        <div id="register-form-title-container">
+            <h1><b>Registracija</b></h1>
+        </div>
+        <div id="register-form-container">
+            <form action="/register" method="post">
+                <div class="register-field-container">
+                    <input class="register-field" type="email" name="username" placeholder="Elektroninis paštas" autocomplete="off" required>
+                </div>
 
-<div id="register-container">  
-    <div id="register-form-title-container">
-        <h1><b>Registracija</b></h1>
-    </div>
-    <div id="register-form-container">
-        <form action="/register" method="post">
-            <div class="register-field-container">
-                <input class="register-field" type="email" name="username" placeholder="Elektroninis paštas" autocomplete="off" required>
-            </div>
+                <div class="register-field-container">
+                    <input  id="password1" class="register-field" type="password" name="password" oninput="check()" placeholder="Slaptažodis" autocomplete="off" required>
+                </div>
 
-            <div class="register-field-container">
-                <input  id="password1" class="register-field" type="password" name="password" oninput="check()" placeholder="Slaptažodis" autocomplete="off" required>
-            </div>
+                <div class="register-field-container">
+                    <input id="password2"class="register-field" type="password" name="password2" oninput="check()" placeholder="Slaptažodis" autocomplete="off" required>
+                </div>
 
-            <div class="register-field-container">
-                <input id="password2"class="register-field" type="password" name="password2" oninput="check()" placeholder="Slaptažodis" autocomplete="off" required>
-            </div>
+                <div class="register-field-container">
+                    <input class="register-field" type="text" name="name" placeholder="Vardas" autocomplete="off" required>
+                </div>
 
-            <div class="register-field-container">
-                <input class="register-field" type="text" name="name" placeholder="Vardas" autocomplete="off" required>
-            </div>
+                <div class="register-field-container">
+                    <input class="register-field" type="text" name="lastName" placeholder="Pavardė" autocomplete="off" required>
+                </div>
 
-            <div class="register-field-container">
-                <input class="register-field" type="text" name="lastName" placeholder="Pavardė" autocomplete="off" required>
-            </div>
-
-            <div id="store-input-container" class="register-field-container">
-                <label for="store">Padalinys:</label>
-                <select id="store" name="store" size="1" required>
-                    <option value="" selected="selected"></option>
-                    <option value="26">Kaišiadorys</option>
-                </select>
-            </div>
+                <div id="store-input-container" class="register-field-container">
+                    <label for="store">Padalinys:</label>
+                    <select id="store" name="store" size="1" required>
+                        <option value="" selected="selected"></option>
+                        <option value="26">Kaišiadorys</option>
+                    </select>
+                </div>
 
 
-            <div id="register-button-container">
-                <input id="register-button" disabled="true" type="submit" class="btn btn-dark" value="Registruotis">
-            </div>
-        </form>
+                <div id="register-button-container">
+                    <input id="register-button" disabled="true" type="submit" class="btn btn-dark" value="Registruotis">
+                </div>
+            </form>
 
-        <a id="log-in-link" href="/">Atgal į prisijungimą</a>
+            <a id="log-in-link" href="/">Atgal į prisijungimą</a>
+        </div>
     </div>
 </div>
-
 <%- include("../partials/footer"); %>

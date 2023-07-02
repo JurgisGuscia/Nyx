@@ -1,23 +1,24 @@
 <%- include("../partials/header"); %>
+<div id="artificial-body">
+    <div id="log-in-container">
+        <div id="log-in-form-title-container">
+            <h1><b>Prisijunkite</b></h1>
+        </div>
+        <div id="log-in-form-container">
+            <form action="/" method="post">
+                <div id="log-in-id-container" >
+                    <input id="log-in-id" type="text" name="username" placeholder="Vartotojas" autocomplete="off">
+                </div>
+                <div id="log-in-psw-container" >
+                    <input id="log-in-psw" type="password" name="password" placeholder="Slaptažodis">
+                </div>
+                <div id="log-in-button-container">
+                    <input id="log-in-button" type="submit" class="btn btn-dark" value="Prisijungti">
+                </div>
+            </form>
 
-<div id="log-in-container">
-    <div id="log-in-form-title-container">
-        <h1><b>Prisijunkite</b></h1>
-    </div>
-    <div id="log-in-form-container">
-        <form action="/" method="post">
-            <div id="log-in-id-container" >
-                <input id="log-in-id" type="text" name="username" placeholder="Vartotojas" autocomplete="off">
-            </div>
-            <div id="log-in-psw-container" >
-                <input id="log-in-psw" type="password" name="password" placeholder="Slaptažodis">
-            </div>
-            <div id="log-in-button-container">
-                <input id="log-in-button" type="submit" class="btn btn-dark" value="Prisijungti">
-            </div>
-        </form>
-
-        <a id="registration-link" href="register">Registracija</a>
+            <a id="registration-link" href="register">Registracija</a>
+        </div>
     </div>
 </div>
  

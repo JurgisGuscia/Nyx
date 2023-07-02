@@ -8,3 +8,7 @@ function check() {
       document.getElementById("register-button").disabled = false;
     }
   }
+
+  $("#add-new-item-button").on("click", ()=>{
+    //shot add new item form
+  });

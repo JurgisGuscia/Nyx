@@ -1,4 +1,30 @@
 <%- include("../partials/header"); %>
-<h1>HOME PAGE</h1>
-<a href="/logout">Atsijungti</a>
+<div id="home-wrap-div">
+    <div id="home-page-container">
+        <div id="user-panel-container">
+            <div id="user-panel-header-container">Vartotojas</div>
+            <div id="user-panel-content-container">
+                
+                <div id="user-panel-name" class="user-panel-info-field"><b>Jurgis Guščia</b></div>
+                <div id="user-panel-store" class="user-panel-info-field">PSKYR-260</div>
+                <div id="user-panel-position" class="user-panel-info-field">Prekių priėmėjas-išdavėjas</div>
+                
+                <div id="logout-href"><a href="/logout">Atsijugnti</a></div>
+            </div>
+        </div>
+        
+        <div id="home-page-content-area-container">
+            <div id="home-page-header-container">
+                <a href="/home">Grąžinimai</a>
+                <a href="/home">Išvežimui</a>
+                <a href="/home">Grąžinimui į salę</a>
+                <button id="add-new-item-button">Pridėti prekę</button>
+            </div>
+            <div id="home-page-content-container">
+
+                
+            </div>
+        </div>
+    </div>
+</div>
 <%- include("../partials/footer"); %>

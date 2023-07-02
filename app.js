@@ -45,10 +45,36 @@ const userSchema = new mongoose.Schema ({
     verifiedEmail: Boolean,
     verifiedAccount: Boolean
 });
+ const itemSchema = new mongoose.Schema ({
+    addDate: {  //date item was return on, set as index
+        type: String,
+        index: true
+    },
+    code: String, //item code
+    name: String, //item name
+    ammount: Number, //ammount of items returned
+    authorUser: String, //who created the entry
+    boughtIn: String, //store that item was bought in
+    authorComment: String, //comment of the user who returned the item
+    resolveDate: String, //when entry was solved 
+    resolvedBy: String, //user that resolved the entry
+    resolve: String, //resolve - export or sell localy
+    resolved: Boolean, //weather item is resolved or not 
+    resolverComment: String, //comment of the user who resolved the item
+    exported: Boolean, //if it is exported
+    exportedBy: String, //who exported the item
+    exportDate: String, //date of item export
+    exporterComment: String, //comment of the user who exported item
+    movedToStore: Boolean, //item returned to local store
+    movedToStoreBy: String, //who moved item to the local store
+    moveDate: String, //date of item movement to the store
+    moverComment: String //comment of the user who moved the item to the store
+});
 
 userSchema.plugin(passportLocalMongoose);
 
 const User = new mongoose.model("User", userSchema);
+const Item = new mongoose.model("Item", itemSchema);
 
 passport.serializeUser((user, done)=>{
     done(null, user);
