@@ -7,7 +7,7 @@
 }
 *{
     font-family: sans-serif;
-    
+    cursor:default;
 }
 #artificial-body{
     display:flex;
@@ -75,6 +75,7 @@
 }
 #registration-link:hover{
     text-decoration: underline;
+    cursor:pointer;
 }
 #log-in-link{
     text-decoration: none;
@@ -83,6 +84,7 @@
 }
 #log-in-link:hover{
     text-decoration: underline;
+    cursor:pointer;
 }
 #register-button-container{
     width: 110px;
@@ -195,6 +197,7 @@
 }
 #home-page-header-container > a:hover{
     background-color: var(--contrast);
+    cursor:pointer;
 }
 #home-page-content-container{
     background-color: rgba(26, 26, 26, 0.1);
@@ -202,6 +205,7 @@
     min-height: 700px;
     margin-top: 10px;
     border-radius: var(--border-radius);
+    padding-top: 10px;
 }
 #logout-href{ 
     margin:auto;
@@ -213,6 +217,7 @@
     text-decoration: none;
     color: var(--primary);
     font-size: 0.8rem;
+    cursor:pointer;
 }
 #logout-href > a:hover{ 
     text-decoration: underline;
@@ -301,4 +306,84 @@
 #cancel-new-item-addition{
     width: 80px;
     height: 40px;
+}
+.single-item-container{
+    width: 676px;
+    height: 25px;
+    margin-bottom: 2px;
+    margin-left: 10px;
+    border: solid 1px var(--primary);
+    border-radius: 5px;
+    font-size: 0.8rem;
+    padding-top: 2px;
+}
+.single-item-container:hover{
+    background-color: rgba(26, 26, 26, 0.8);
+    color: white;
+}
+#single-item-code-container{
+    width: 130px;
+    height: 100%;
+    display: inline-block;
+    padding-left: 5px;
+    vertical-align: top;
+    overflow:hidden;
+    text-overflow: ellipsis;
+}
+#single-item-container-header{
+    width: 100%;
+    height: 25px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+#single-item-name-container{
+    width: 300px;
+    height: 100%;
+    display: inline-block;
+    padding-left: 5px;
+    vertical-align: top;
+    overflow:hidden;
+    text-overflow: ellipsis;
+}
+#single-item-ammount-container{
+    width: 80px;
+    height: 100%;
+    display: inline-block;
+    vertical-align: top;
+    overflow:hidden;
+    text-overflow: ellipsis;
+}
+#single-item-code-container-header{
+    width: 130px;
+    height: 100%;
+    display: inline-block;
+    padding-left: 5px;
+}
+#single-item-name-container-header{
+    width: 300px;
+    height: 100%;
+    display: inline-block;
+    padding-left: 5px;
+}
+#single-item-ammount-container-header{
+    width: 80px;
+    height: 100%;
+    display: inline-block;
+    padding-left: 5px;
+}
+#single-item-date-container{
+    width: 150px;
+    height: 100%;
+    display: inline-block;
+    padding-left: 5px;
+    vertical-align: top;
+    overflow:hidden;
+    text-overflow: ellipsis;
+}
+#single-item-date-container-header{
+    width: 150px;
+    height: 100%;
+    display: inline-block;
+    padding-left: 5px;
 }

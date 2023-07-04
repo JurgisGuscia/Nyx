@@ -85,19 +85,14 @@ passport.deserializeUser((user, done)=>{
 });
 
 passport.use(new LocalStrategy(async function(username, password, done){
-    console.log("is called");
     const user = await User.findOne( {username: username}).exec();
     if(user == null){
-        console.log("no user with that email found");
         return done(null, false); // no user with that email found
     }
-
     try{
         if(await bcrypt.compare(password, user.password)){
-            console.log("user found and password matches");
-            return done(null, true); // user found and password matches
+            return done(null, user); // user found and password matches
         }else{
-            console.log("user founs, but password doesn't match");
             return done(null, false); // user founs, but password doesn't match
         }
     }catch (e){
@@ -175,9 +170,35 @@ app.get("/register", checkNotAuthenticated, (req, res)=>{
     res.render("pages/register");
 });
 
-app.get("/home", checkAuthenticated, function(req, res){
-    res.render("pages/home");
+app.get("/home", checkAuthenticated, async function(req, res){
+    const itemList = await Item.find({resolved: false || null}).exec();
+    res.render("pages/home", {items: itemList});
 });
+
+app.post("/home", (req, res)=>{
+    const dateObj  = new Date();
+    const dateYear = dateObj.getFullYear();
+    var dateMonth = dateObj.getMonth() + 1;
+    if(dateMonth < 10){
+        dateMonth = "0" + dateMonth;
+    }
+    var dateDay = dateObj.getDay();
+    if(dateDay < 10){
+        dateDay = "0" + dateDay;
+    }
+    const dateString = dateYear + "-" + dateMonth + "-" + dateDay;
+    Item.create({
+        addDate: dateString,
+        code: req.body.itemCode,
+        name: req.body.itemName,
+        ammount: req.body.itemCount,
+        authorUser: req.user.username,
+        boughtIn: req.body.boughtIn,
+        authorComment: req.body.authorComment
+    });
+    res.redirect("/home");
+})
+
 
 app.listen(3000, (req, res)=>{
     console.log("server listening on port 3000");

@@ -2,12 +2,12 @@
 <div id="back-drop" class="hidden"></div>
 <div id="add-new-item-form-container" class="hidden">
     <form id="add-new-item-form" action="/home" method="POST">
-        <div class="new-item-input-container"><input type="text" name="itemCode" placeholder="Kodas" required></div>
-        <div class="new-item-input-container"><input type="text" name="itemName" placeholder="Pavadinimas" required></div>
-        <div class="new-item-input-container"><input type="number" name="itemCount" placeholder="Kiekis" required></div>
+        <div class="new-item-input-container"><input type="text" name="itemCode" placeholder="Kodas" required autocomplete="off"></div>
+        <div class="new-item-input-container"><input type="text" name="itemName" placeholder="Pavadinimas" required autocomplete="off"></div>
+        <div class="new-item-input-container"><input type="number" name="itemCount" placeholder="Kiekis" required autocomplete="off"></div>
         <div  class="new-item-input-container">
             <label id="boughIn-label" for="boughtIn">Pirkta:</label>
-            <select id="boughtIn" name="boughtIn" size="1" required>
+            <select id="boughtIn" name="boughtIn" size="1" required autocomplete="off">
                 <option value="" selected="selected"></option>
                 <option value="0">Internetu</option>
                 <option value="01">Jonavos g.</option>
@@ -48,7 +48,20 @@
                 <button id="add-new-item-button">Pridėti prekę</button>
             </div>
             <div id="home-page-content-container">
-
+                <div id="single-item-container-header">
+                    <div id="single-item-name-container-header">Prekės pavadinimas</div>
+                    <div id="single-item-code-container-header">Prekės kodas</div>                        
+                    <div id="single-item-ammount-container-header">Kiekis</div>
+                    <div id="single-item-date-container-header">Grąžinimo data</div>
+                </div>
+                <% items.forEach(e =>{ %>
+                    <div id=<%= e._id %> class="single-item-container">
+                        <div id="single-item-name-container"><%= e.name %></div>
+                        <div id="single-item-code-container"><%= e.code %></div>                        
+                        <div id="single-item-ammount-container"><%= e.ammount %></div>
+                        <div id="single-item-date-container"><%= e.addDate %></div>
+                    </div>
+                <%});%>
                 
             </div>
         </div>
