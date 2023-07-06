@@ -1,31 +1,18 @@
 <%- include("../partials/header"); %>
 <div id="back-drop" class="hidden"></div>
-
-<!-- ==================================================Add new item form================================================== -->
 <%- include("../partials/addNewItemForm.ejs"); %>
-
-<!-- ====================================================Edit item form==========-======================================== -->
-
-
-
-
-
-
 <div id="home-wrap-div">
     <div id="home-page-container">
         <div id="user-panel-container">
             <div id="user-panel-header-container">Vartotojas</div>
             <div id="user-panel-content-container">
-                
                 <div id="user-panel-name" class="user-panel-info-field"><b>Jurgis Guščia</b></div>
                 <div id="user-panel-store" class="user-panel-info-field">PSKYR-260</div>
                 <div id="user-panel-position" class="user-panel-info-field">Prekių priėmėjas-išdavėjas</div>
-                
                 <div id="logout-href"><a href="/logout">Atsijugnti</a></div>
             </div><br>
             <%- include("../partials/returnMenu.ejs"); %>
         </div>
-        
         <div id="home-page-content-area-container">
             <%- include("../partials/navBar.ejs"); %>
             <div id="home-page-content-container">
@@ -35,7 +22,6 @@
                     <div id="single-item-ammount-container-header">Kiekis</div>
                     <div id="single-item-date-container-header">Grąžinimo data</div>
                 </div>
-                
                 <% items.forEach(e =>{ %>
                     <div class="item-line-container">
                     <div id= <%= e._id %> class="single-item-container">
@@ -43,7 +29,6 @@
                         <div id="single-item-code-container"><%= e.code %></div>                        
                         <div id="single-item-ammount-container"><%= e.ammount %></div>
                         <div id="single-item-date-container"><%= e.addDate %></div>
-                        
                     </div>
                     <button class="copy-to-clip-button"><img src="/img/icons/copy-icon.png"></button>
                 </div>

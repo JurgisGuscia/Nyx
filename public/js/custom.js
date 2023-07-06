@@ -50,3 +50,11 @@ function check() {
   $("#completed-returns").on("click", ()=>{
     window.location.replace("/completedReturns");
   });
+
+  const activeItemList = document.querySelectorAll(".single-item-container");
+  activeItemList.forEach(item =>{
+    item.addEventListener("click", function(){
+      window.location.replace("/editItem/" + item.id);
+    })
+  });
+  

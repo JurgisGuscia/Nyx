@@ -219,7 +219,10 @@ app.post("/activeReturns", (req, res)=>{
     });
     res.redirect("/activeReturns");
 })
-
+app.get("/editItem/:id", async (req,res)=>{
+    const item = await Item.find({_id: req.params.id}).exec();
+    res.render("pages/editItem", {item: item[0]});
+});
 
 app.listen(3000, (req, res)=>{
     console.log("server listening on port 3000");

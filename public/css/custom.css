@@ -4,6 +4,7 @@
     --contrast: #C84B31;
     --compliment: #ecdbba;
     --border-radius: 5px;
+    --shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 *{
     font-family: sans-serif;
@@ -166,6 +167,7 @@
     padding-top: 0.5rem;
     color: white;
     border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
 }
 #user-panel-content-container{
     padding-top:10px;
@@ -174,6 +176,7 @@
     height: 160px;
     margin-top: 10px;
     border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
 }
 #menu-panel-header-container{
     background-color: var(--primary);
@@ -185,6 +188,7 @@
     padding-top: 0.5rem;
     color: white;
     border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
 }
 #menu-panel-content-container{
     padding-top:10px;
@@ -194,15 +198,18 @@
     height: 230px;
     margin-top: 10px;
     border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
 }
 #home-page-content-area-container{
     width: 800px;
+    
 }
 #home-page-header-container{
     background-color: var(--primary);
     width: 800px;
     height: 40px;
     border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
 }
 .main-nav-link{
     display: inline-block;
@@ -222,10 +229,11 @@
 #home-page-content-container{
     background-color: rgba(26, 26, 26, 0.1);
     width: 100%;
-    min-height: 700px;
+    min-height: 300px;
     margin-top: 10px;
     border-radius: var(--border-radius);
     padding-top: 10px;
+    box-shadow: var(--shadow);
 }
 #logout-href{ 
     margin:auto;
@@ -433,7 +441,44 @@
 .active-link{
     background-color: var(--contrast);
 }
-
-
-
+#edit-item-form{
+    height: 100%;
+}
+#edit-page-content-container{
+    background-color: rgba(26, 26, 26, 0.1);
+    width: 100%;
+    min-height: 400px;
+    margin-top: 10px;
+    border-radius: var(--border-radius);
+    padding-top: 10px;    
+    
+}
+.item-edit-form-col{
+    height: 300px;
+    width: 30%;
+    display: inline-block;
+    vertical-align: top;
+}
+#return-info-container{
+    margin-left: 10px;
+}
+.eidt-item-line-container{
+    display:inline-block;
+    font-size: 0.8rem;
+    margin-bottom: 5px;
+}
+.edit-item-label-field{
+    width: 50px;
+    height: 20px;
+    padding-left: 5px;
+}
+.edit-item-input-field{
+    width: 186px;
+    height: 20px;
+}
+#author-comment-area{
+    width: 240px;
+    height: 100px;
+    resize:none;
+}
 

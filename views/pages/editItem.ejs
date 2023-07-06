@@ -1,0 +1,98 @@
+<%- include("../partials/header"); %>
+<div id="back-drop" class="hidden"></div>
+
+<div id="home-wrap-div">
+    <div id="home-page-container">
+        <div id="user-panel-container">
+            <div id="user-panel-header-container">Vartotojas</div>
+            <div id="user-panel-content-container">
+                <div id="user-panel-name" class="user-panel-info-field"><b>Jurgis Guščia</b></div>
+                <div id="user-panel-store" class="user-panel-info-field">PSKYR-260</div>
+                <div id="user-panel-position" class="user-panel-info-field">Prekių priėmėjas-išdavėjas</div> 
+                <div id="logout-href"><a href="/logout">Atsijugnti</a></div>
+            </div><br>
+            
+        </div>
+        
+        <div id="home-page-content-area-container">
+            <%- include("../partials/navBar.ejs"); %>
+            <div id="edit-page-content-container">
+                <form id="edit-item-form" action="/editItem" method="POST">
+                    <div id="return-info-container" class="item-edit-form-col">
+                        <div class="eidt-item-line-container">
+                            <label for="code" class="edit-item-label-field">Kodas</label>
+                            <input type="text" name="code" autocomplete="off" class="edit-item-input-field" required value=<%= item.code %>>
+                        </div>
+                        <div class="eidt-item-line-container">
+                            <label for="name" class="edit-item-label-field">Pavad.</label>
+                            <input type="text" name="name" autocomplete="off" class="edit-item-input-field" required value=<%= item.name %>>
+                        </div>
+                        <div class="eidt-item-line-container">
+                            <label for="ammount" class="edit-item-label-field">Kiekis</label>
+                            <input type="number" name="ammount" autocomplete="off" class="edit-item-input-field" required value=<%= item.ammount %>>
+                        </div>
+                        <div class="eidt-item-line-container">
+                            <label for="boughtIn" class="edit-item-label-field">Pirkta</label>
+                            <select name="boughtIn" size="1" required autocomplete="off" class="edit-item-input-field">
+                                <option value="0" <% if(item.boughtIn === "0"){ %> selected <% } %> >Internetu</option>
+                                <option value="01" <% if(item.boughtIn === "01"){ %> selected <% } %> >Jonavos g.</option>
+                                <option value="80" <% if(item.boughtIn === "80"){ %> selected <% } %> >Draugystė</option>
+                                <option value="110" <% if(item.boughtIn === "110"){ %> selected <% } %> >Mega</option>
+                                <option value="260" <% if(item.boughtIn === "260"){ %> selected <% } %> >Kaišiadorys</option>
+                                <option value="999" <% if(item.boughtIn === "999"){ %> selected <% } %> >Kita</option>
+                            </select>
+                        </div>
+                        <div class="eidt-item-line-container">
+                            <label for="authorUser" class="edit-item-label-field">Sukurė</label>
+                            <input type="text" name="authorUser" autocomplete="off" class="edit-item-input-field" readonly required value=<%= item.authorUser %>>
+                        </div>
+                        <div class="eidt-item-line-container">
+                            <label for="addDate" class="edit-item-label-field">Data</label>
+                            <input type="text" name="addDate" autocomplete="off" class="edit-item-input-field" readonly required value=<%= item.addDate %>>
+                        </div>
+                        <textarea id="author-comment-area" name="authorComment" autocomplete="off" placeholder="Komentaras"><%= item.authorComment %></textarea>                        
+                    </div>
+                    <div id="resolve-info-container" class="item-edit-form-col">
+
+                        
+                       
+
+                    <div id="completed-info-container" class="item-edit-form-col">
+                        
+                                   
+                    </div>
+                </form>
+            <!--
+                code 
+                name 
+                ammount
+                boughtIn
+                authorUser
+                addDate                
+                authorComment
+
+                resolved
+                resolveDate
+                resolvedBy
+                resolve
+                resolverComment
+
+                exported
+                exportedBy
+                exportDate
+                exporterComment
+
+                movedToStore
+                movedToStoreBy
+                moveDate
+                moverComment
+            -->
+                
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
+</script>
+<%- include("../partials/footer"); %>
