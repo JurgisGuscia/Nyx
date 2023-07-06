@@ -161,6 +161,9 @@ function checkNotAuthenticated(req, res, next){
 }
 
 
+app.get("/home", checkAuthenticated, (req, res)=>{
+    res.render("pages/home");
+});
 
 app.get("/", checkNotAuthenticated, (req, res)=>{
     res.render("pages/login");
@@ -170,12 +173,30 @@ app.get("/register", checkNotAuthenticated, (req, res)=>{
     res.render("pages/register");
 });
 
-app.get("/home", checkAuthenticated, async function(req, res){
+
+// still need to edit item list filtration
+app.get("/activeReturns", checkAuthenticated, async function(req, res){
     const itemList = await Item.find({resolved: false || null}).exec();
-    res.render("pages/home", {items: itemList});
+    res.render("pages/activeReturns", {items: itemList});
 });
 
-app.post("/home", (req, res)=>{
+app.get("/awaitingExport", checkAuthenticated, async function(req, res){
+    const itemList = await Item.find({resolved: false || null}).exec();
+    res.render("pages/awaitingExport", {items: itemList});
+});
+
+app.get("/awaitingReturn", checkAuthenticated, async function(req, res){
+    const itemList = await Item.find({resolved: false || null}).exec();
+    res.render("pages/awaitingReturn", {items: itemList});
+});
+
+app.get("/completedReturns", checkAuthenticated, async function(req, res){
+    const itemList = await Item.find({resolved: false || null}).exec();
+    res.render("pages/completedReturns", {items: itemList});
+});
+
+
+app.post("/activeReturns", (req, res)=>{
     const dateObj  = new Date();
     const dateYear = dateObj.getFullYear();
     var dateMonth = dateObj.getMonth() + 1;
@@ -196,7 +217,7 @@ app.post("/home", (req, res)=>{
         boughtIn: req.body.boughtIn,
         authorComment: req.body.authorComment
     });
-    res.redirect("/home");
+    res.redirect("/activeReturns");
 })
 
 

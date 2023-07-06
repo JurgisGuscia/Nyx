@@ -1,40 +1,6 @@
 <%- include("../partials/header"); %>
 <div id="back-drop" class="hidden"></div>
 
-<!-- ==================================================Add new item form================================================== -->
-<div id="add-new-item-form-container" class="hidden">
-    <form id="add-new-item-form" action="/home" method="POST">
-        <div class="new-item-input-container"><input type="text" name="itemCode" placeholder="Kodas" required autocomplete="off"></div>
-        <div class="new-item-input-container"><input type="text" name="itemName" placeholder="Pavadinimas" required autocomplete="off"></div>
-        <div class="new-item-input-container"><input type="number" name="itemCount" placeholder="Kiekis" required autocomplete="off"></div>
-        <div  class="new-item-input-container">
-            <label id="boughIn-label" for="boughtIn">Pirkta:</label>
-            <select id="boughtIn" name="boughtIn" size="1" required autocomplete="off">
-                <option value="" selected="selected"></option>
-                <option value="0">Internetu</option>
-                <option value="01">Jonavos g.</option>
-                <option value="80">Draugystė</option>
-                <option value="110">Mega</option>
-                <option value="260">Kaišiadorys</option>
-                <option value="999">Kita</option>
-            </select>
-        </div>
-        <div id="new-item-comment-area-container" class="new-item-input-container"><textarea id="new-item-comment-area" name="authorComment" placeholder="Komentaras (nebūtina)"></textarea></div>
-        
-    </form>
-    <div id="add-new-item-form-button-container">
-        <button id="add-new-item-form-button" form="add-new-item-form" class="btn btn-dark" type="submit">Pridėti</button>
-        <button id="cancel-new-item-addition" class="btn btn-light">Atšaukti</button>
-    </div>
-</div>
-
-<!-- ====================================================Edit item form==========-======================================== -->
-
-
-
-
-
-
 <div id="home-wrap-div">
     <div id="home-page-container">
         <div id="user-panel-container">
@@ -46,37 +12,20 @@
                 <div id="user-panel-position" class="user-panel-info-field">Prekių priėmėjas-išdavėjas</div>
                 
                 <div id="logout-href"><a href="/logout">Atsijugnti</a></div>
-            </div>
+            </div><br>
         </div>
         
         <div id="home-page-content-area-container">
-            <div id="home-page-header-container">
-                <a href="/home">Grąžinimai</a>
-                <button id="add-new-item-button">Pridėti prekę</button>
-            </div>
+            <%- include("../partials/navBar.ejs"); %>
             <div id="home-page-content-container">
-                <div id="single-item-container-header">
-                    <div id="single-item-name-container-header">Prekės pavadinimas</div>
-                    <div id="single-item-code-container-header">Prekės kodas</div>                        
-                    <div id="single-item-ammount-container-header">Kiekis</div>
-                    <div id="single-item-date-container-header">Grąžinimo data</div>
-                </div>
-                
-                <% items.forEach(e =>{ %>
-                    <div class="item-line-container">
-                    <div id= <%= e._id %> class="single-item-container">
-                        <div id="single-item-name-container"><%= e.name %></div>
-                        <div id="single-item-code-container"><%= e.code %></div>                        
-                        <div id="single-item-ammount-container"><%= e.ammount %></div>
-                        <div id="single-item-date-container"><%= e.addDate %></div>
-                        
-                    </div>
-                    <button class="copy-to-clip-button"><img src="/img/icons/copy-icon.png"></button>
-                </div>
-                <%});%>
+                No activity today
                 
             </div>
         </div>
     </div>
 </div>
+<script>
+    document.getElementById("main-home-link").classList.add("active-link");
+
+</script>
 <%- include("../partials/footer"); %>

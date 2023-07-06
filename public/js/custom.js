@@ -34,3 +34,19 @@ function check() {
       document.body.removeChild(tempText);
     });
   }
+
+  $("#active-returns").on("click", ()=>{
+    window.location.replace("/activeReturns");
+  });
+
+  $("#awaiting-export").on("click", ()=>{
+    window.location.replace("/awaitingExport");
+  });
+
+  $("#awaiting-return").on("click", ()=>{
+    window.location.replace("/awaitingReturn");
+  });
+
+  $("#completed-returns").on("click", ()=>{
+    window.location.replace("/completedReturns");
+  });
