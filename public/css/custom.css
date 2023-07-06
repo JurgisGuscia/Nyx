@@ -151,7 +151,7 @@
     
 }
 #user-panel-container{
-    width: 300px;
+    width: 200px;
     height: 200px;
     border-radius: var(--border-radius);
     margin-right: 10px;
@@ -176,11 +176,11 @@
     border-radius: var(--border-radius);
 }
 #home-page-content-area-container{
-    width: 700px;
+    width: 800px;
 }
 #home-page-header-container{
     background-color: var(--primary);
-    width: 700px;
+    width: 800px;
     height: 40px;
     border-radius: var(--border-radius);
 }
@@ -316,6 +316,7 @@
     border-radius: 5px;
     font-size: 0.8rem;
     padding-top: 2px;
+    display: inline-block;
 }
 .single-item-container:hover{
     background-color: rgba(26, 26, 26, 0.8);
@@ -387,3 +388,25 @@
     display: inline-block;
     padding-left: 5px;
 }
+.copy-to-clip-button{
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    border: none;
+    background-color: transparent;
+}
+.copy-to-clip-button > img{
+    width: 20px;
+    height: 20px;
+    transition: ease-in-out 0.1s;
+}
+.copy-to-clip-button > img:hover{
+    width: 23px;
+    height: 23px;
+    cursor: pointer;
+    transition: ease-in-out 0.1s;
+}
+
+
+
+
