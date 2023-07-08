@@ -454,7 +454,7 @@
     
 }
 .item-edit-form-col{
-    height: 300px;
+    height: 100%;
     width: 30%;
     display: inline-block;
     vertical-align: top;
@@ -481,4 +481,38 @@
     height: 100px;
     resize:none;
 }
-
+#edit-item-form-control-container{
+    margin-top: 20px;
+    text-align: center;
+}
+#select-resolve{
+    width: 145px;
+}
+.resolve-info-line-container{
+    margin-bottom: 5px;
+}
+.resolve-info-label-field{
+    width: 100px;
+    display:inline-block;
+    font-size: 0.8rem;
+}
+.resolve-info-info-field{
+    width: 135px;
+    display:inline-block;
+    font-size: 0.8rem;
+}
+.item-edit-form-col-title{
+    margin:auto;
+    text-align: center;
+    font-weight: bold;
+}
+#resolver-comment-area{
+    width: 240px;
+    height: 100px;
+    resize:none;  
+}
+#finisher-comment-area{
+    width: 240px;
+    height: 100px;
+    resize:none;  
+}

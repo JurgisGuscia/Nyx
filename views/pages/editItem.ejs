@@ -17,8 +17,9 @@
         <div id="home-page-content-area-container">
             <%- include("../partials/navBar.ejs"); %>
             <div id="edit-page-content-container">
-                <form id="edit-item-form" action="/editItem" method="POST">
+                <form id="edit-item-form" action="/editItem/<%= item._id %>" method="POST">
                     <div id="return-info-container" class="item-edit-form-col">
+                        <div class="item-edit-form-col-title">Grąžinimo informacija</div>
                         <div class="eidt-item-line-container">
                             <label for="code" class="edit-item-label-field">Kodas</label>
                             <input type="text" name="code" autocomplete="off" class="edit-item-input-field" required value=<%= item.code %>>
@@ -50,18 +51,61 @@
                             <label for="addDate" class="edit-item-label-field">Data</label>
                             <input type="text" name="addDate" autocomplete="off" class="edit-item-input-field" readonly required value=<%= item.addDate %>>
                         </div>
-                        <textarea id="author-comment-area" name="authorComment" autocomplete="off" placeholder="Komentaras"><%= item.authorComment %></textarea>                        
-                    </div>
-                    <div id="resolve-info-container" class="item-edit-form-col">
-
+                        <textarea id="author-comment-area" name="authorComment" autocomplete="off" placeholder="Komentaras"><%= item.authorComment %></textarea>   
                         
-                       
+                    </div>
+                
+                    <div id="resolve-info-container" class="item-edit-form-col">
+                        <div class="item-edit-form-col-title">Sprendimo informacija</div>
+                        <div class="resolve-info-line-container">
+                            <div class="resolve-info-label-field">Sprendimas:</div>
+                            <div class="resolve-info-info-field"><% if(item.resolved == true){ if(item.resolve === "export"){ %> Išvežti <% }else{ %> Grąžinti į skyrių<% } }else{ %> Nėra <% } %></div>
+                        </div>
+                        <div class="resolve-info-line-container">
+                            <div class="resolve-info-label-field">Autorius:</div>
+                            <div class="resolve-info-info-field"><% if(item.resolved == true){ %> <%= item.resolvedBy %> <% }else{ %> --- <% } %></div>
+                        </div>
+                        <div class="resolve-info-line-container">
+                            <div class="resolve-info-label-field">Sprendimo data:</div>
+                            <div class="resolve-info-info-field"><% if(item.resolved == true){ %> <%= item.resolveDate %> <% }else{ %> --- <% } %></div>
+                        </div>
+                        <div class="resolve-info-line-container">
+                            <textarea name="resolverComment" placeholder="Komentaras" id="resolver-comment-area" ><% if(item.resolved == true){ %> <%= item.resolverComment %> <%}%></textarea>
+                        </div>
+                        <div class="resolve-info-line-container">
+                            <label for="resolve">Sprendimas:</label>
+                            <select id="select-resolve" name="resolve" size="1" autocomplete="off">
+                                <option value="0" selected="selected"></option>
+                                <option value="export">Išvežti</option>
+                                <option value="return">Grąžinti į skyrių</option>
+                            </select>
+                        </div>
+                    </div>
 
                     <div id="completed-info-container" class="item-edit-form-col">
-                        
-                                   
+                        <div class="item-edit-form-col-title">Užbaigimo informacija</div>
+                        <div class="resolve-info-line-container">
+                            <div class="resolve-info-label-field">Užbaigta:</div>
+                            <div class="resolve-info-info-field"></div>
+                        </div>
+                        <div class="resolve-info-line-container">
+                            <div class="resolve-info-label-field">Autorius:</div>
+                            <div class="resolve-info-info-field"></div>
+                        </div>
+                        <div class="resolve-info-line-container">
+                            <div class="resolve-info-label-field">Užbaigimo data:</div>
+                            <div class="resolve-info-info-field"></div>
+                        </div>
+                        <div class="resolve-info-line-container">
+                            <textarea name="finisherComment" placeholder="Komentaras" id="finisher-comment-area" ><% if(item.resolved == true){ %> <%= item.resolverComment %> <%}%></textarea>
+                        </div>
+                                  
                     </div>
                 </form>
+                <div id="edit-item-form-control-container">
+                    <button form="edit-item-form" class="btn btn-dark">Atnaujinti</button>
+                    <div id="edit-item-form-cancel" class="btn btn-light">Atšaukti</div>
+                </div>
             <!--
                 code 
                 name 
@@ -77,15 +121,10 @@
                 resolve
                 resolverComment
 
-                exported
-                exportedBy
-                exportDate
-                exporterComment
-
-                movedToStore
-                movedToStoreBy
-                moveDate
-                moverComment
+                finished
+                finishDate
+                finishedBy
+                sinisherComment
             -->
                 
             </div>

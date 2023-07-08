@@ -50,6 +50,10 @@ function check() {
   $("#completed-returns").on("click", ()=>{
     window.location.replace("/completedReturns");
   });
+  
+  $("#edit-item-form-cancel").on("click", ()=>{
+    window.location.replace("/activeReturns");
+  });
 
   const activeItemList = document.querySelectorAll(".single-item-container");
   activeItemList.forEach(item =>{

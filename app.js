@@ -61,14 +61,10 @@ const userSchema = new mongoose.Schema ({
     resolve: String, //resolve - export or sell localy
     resolved: Boolean, //weather item is resolved or not 
     resolverComment: String, //comment of the user who resolved the item
-    exported: Boolean, //if it is exported
-    exportedBy: String, //who exported the item
-    exportDate: String, //date of item export
-    exporterComment: String, //comment of the user who exported item
-    movedToStore: Boolean, //item returned to local store
-    movedToStoreBy: String, //who moved item to the local store
-    moveDate: String, //date of item movement to the store
-    moverComment: String //comment of the user who moved the item to the store
+    finished: Boolean, //if it is exported
+    finishedBy: String, //who exported the item
+    finishDate: String, //date of item export
+    finisherComment: String //comment of the user who exported item
 });
 
 userSchema.plugin(passportLocalMongoose);
@@ -181,33 +177,33 @@ app.get("/activeReturns", checkAuthenticated, async function(req, res){
 });
 
 app.get("/awaitingExport", checkAuthenticated, async function(req, res){
-    const itemList = await Item.find({resolved: false || null}).exec();
+    const itemList = await Item.find({resolved: true, resolve: "export"}).exec();
     res.render("pages/awaitingExport", {items: itemList});
 });
 
 app.get("/awaitingReturn", checkAuthenticated, async function(req, res){
-    const itemList = await Item.find({resolved: false || null}).exec();
+    const itemList = await Item.find({resolved: true, resolve: "return"}).exec();
     res.render("pages/awaitingReturn", {items: itemList});
 });
 
 app.get("/completedReturns", checkAuthenticated, async function(req, res){
-    const itemList = await Item.find({resolved: false || null}).exec();
+    const itemList = await Item.find({finished: true}).exec();
     res.render("pages/completedReturns", {items: itemList});
 });
 
 
 app.post("/activeReturns", (req, res)=>{
-    const dateObj  = new Date();
-    const dateYear = dateObj.getFullYear();
+    var dateObj = new Date();
+    var dateYear = dateObj.getFullYear();
     var dateMonth = dateObj.getMonth() + 1;
     if(dateMonth < 10){
         dateMonth = "0" + dateMonth;
     }
-    var dateDay = dateObj.getDay();
+    var dateDay = dateObj.getDate();
     if(dateDay < 10){
         dateDay = "0" + dateDay;
     }
-    const dateString = dateYear + "-" + dateMonth + "-" + dateDay;
+    var dateString = dateYear + "-" + dateMonth + "-" + dateDay;    
     Item.create({
         addDate: dateString,
         code: req.body.itemCode,
@@ -218,10 +214,49 @@ app.post("/activeReturns", (req, res)=>{
         authorComment: req.body.authorComment
     });
     res.redirect("/activeReturns");
-})
+});
+
 app.get("/editItem/:id", async (req,res)=>{
     const item = await Item.find({_id: req.params.id}).exec();
     res.render("pages/editItem", {item: item[0]});
+});
+
+app.post("/editItem/:id", async(req, res)=>{
+    var dateObj2  = new Date();
+    var dateYear2 = dateObj2.getFullYear();
+    var dateMonth2 = dateObj2.getMonth() + 1;
+    if(dateMonth2 < 10){
+        dateMonth2 = "0" + dateMonth2;
+    }
+    var dateDay2 = dateObj2.getDate();
+    if(dateDay2 < 10){
+        dateDay2 = "0" + dateDay2;
+    }
+    var dateString2 = dateYear2 + "-" + dateMonth2 + "-" + dateDay2;
+
+    if(req.body.resolve == "0"){
+        const res = await Item.updateOne({ _id: req.params.id }, { 
+            code: req.body.code,
+            name: req.body.name,
+            ammount: req.body.ammount,
+            boughtIn: req.body.boughtIn,
+            authorComment: req.body.authorComment
+        });    
+    }else{
+        const res = await Item.updateOne({ _id: req.params.id }, { 
+            code: req.body.code,
+            name: req.body.name,
+            ammount: req.body.ammount,
+            boughtIn: req.body.boughtIn,
+            authorComment: req.body.authorComment,
+            resolved: true,
+            resolve: req.body.resolve,
+            resolveDate: dateString2,
+            resolvedBy: req.user.username,
+            resolverComment: req.body.resolverComment
+        });   
+    }
+    res.redirect("/activeReturns");
 });
 
 app.listen(3000, (req, res)=>{
