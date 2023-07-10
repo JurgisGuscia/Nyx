@@ -1,0 +1,15 @@
+<div id="user-panel-header-container">Vartotojas</div>
+    <div id="user-panel-content-container">
+        <div id="user-panel-name" class="user-panel-info-field"><b><%= user.name %> <%= user.lastName %></b></div>
+        <div id="user-panel-store" class="user-panel-info-field">
+            <% if(user.store == "26") {%>Kaišiadorys<%}%>                    
+        </div>
+        <div id="user-panel-position" class="user-panel-info-field">
+            <% if(user.storePosition == "0"){%>Administracija<%}%>
+            <% if(user.storePosition == "1"){%>Kasos<%}%>
+            <% if(user.storePosition == "2"){%>Skyrius<%}%>
+            <% if(user.storePosition == "3"){%>PPG<%}%>
+            <% if(user.storePosition == "4"){%>Nepriskirta<%}%>
+        </div> 
+        <div id="logout-href"><a href="/logout">Atsijugnti</a></div>
+    </div><br>

@@ -45,6 +45,13 @@ const userSchema = new mongoose.Schema ({
     verifiedEmail: Boolean,
     verifiedAccount: Boolean
 });
+//store positions:
+//0 - Administracija
+//1 - Kasos
+//2 - Skyrius
+//3 - PPG
+
+
  const itemSchema = new mongoose.Schema ({
     addDate: {  //date item was return on, set as index
         type: String,
@@ -114,7 +121,7 @@ app.post("/register", async function(req, res){
                 name: req.body.name,
                 lastName: req.body.lastName,
                 store: req.body.store,
-                storePosition: 0,
+                storePosition: "4",
                 webAcces: 0,
                 verifiedEmail: false,
                 verifiedAccount: false
@@ -158,7 +165,7 @@ function checkNotAuthenticated(req, res, next){
 
 
 app.get("/home", checkAuthenticated, (req, res)=>{
-    res.render("pages/home");
+    res.render("pages/home", {user: req.user});
 });
 
 app.get("/", checkNotAuthenticated, (req, res)=>{
@@ -173,22 +180,22 @@ app.get("/register", checkNotAuthenticated, (req, res)=>{
 // still need to edit item list filtration
 app.get("/activeReturns", checkAuthenticated, async function(req, res){
     const itemList = await Item.find({resolved: false || null}).exec();
-    res.render("pages/activeReturns", {items: itemList});
+    res.render("pages/activeReturns", {items: itemList, user: req.user});
 });
 
 app.get("/awaitingExport", checkAuthenticated, async function(req, res){
-    const itemList = await Item.find({resolved: true, resolve: "export"}).exec();
-    res.render("pages/awaitingExport", {items: itemList});
+    const itemList = await Item.find({resolved: true, resolve: "export", finished : false || null}).exec();
+    res.render("pages/awaitingExport", {items: itemList, user: req.user});
 });
 
 app.get("/awaitingReturn", checkAuthenticated, async function(req, res){
-    const itemList = await Item.find({resolved: true, resolve: "return"}).exec();
-    res.render("pages/awaitingReturn", {items: itemList});
+    const itemList = await Item.find({resolved: true, resolve: "return", finished : false || null}).exec();
+    res.render("pages/awaitingReturn", {items: itemList, user: req.user});
 });
 
 app.get("/completedReturns", checkAuthenticated, async function(req, res){
     const itemList = await Item.find({finished: true}).exec();
-    res.render("pages/completedReturns", {items: itemList});
+    res.render("pages/completedReturns", {items: itemList, user: req.user});
 });
 
 
@@ -203,22 +210,28 @@ app.post("/activeReturns", (req, res)=>{
     if(dateDay < 10){
         dateDay = "0" + dateDay;
     }
-    var dateString = dateYear + "-" + dateMonth + "-" + dateDay;    
+    var dateString = dateYear + "-" + dateMonth + "-" + dateDay;
+    if(req.body.authorComment.length > 0){
+        var authorCommentString = req.body.authorComment;
+    }else{
+        var authorCommentString = "Komentaro nėra.";
+    }
+    var authorString = req.user.name + " " + req.user.lastName;
     Item.create({
         addDate: dateString,
         code: req.body.itemCode,
         name: req.body.itemName,
         ammount: req.body.itemCount,
-        authorUser: req.user.username,
+        authorUser: authorString,
         boughtIn: req.body.boughtIn,
-        authorComment: req.body.authorComment
+        authorComment: authorCommentString
     });
     res.redirect("/activeReturns");
 });
 
 app.get("/editItem/:id", async (req,res)=>{
     const item = await Item.find({_id: req.params.id}).exec();
-    res.render("pages/editItem", {item: item[0]});
+    res.render("pages/editItem", {item: item[0], user: req.user});
 });
 
 app.post("/editItem/:id", async(req, res)=>{
@@ -242,19 +255,59 @@ app.post("/editItem/:id", async(req, res)=>{
             boughtIn: req.body.boughtIn,
             authorComment: req.body.authorComment
         });    
+    }else if(!req.body.finish){
+        var rComment = req.body.resolverComment;
+        if(rComment.length > 0){
+            const res = await Item.updateOne({ _id: req.params.id }, { 
+                code: req.body.code,
+                name: req.body.name,
+                ammount: req.body.ammount,
+                boughtIn: req.body.boughtIn,
+                authorComment: req.body.authorComment,
+                resolved: true,
+                resolve: req.body.resolve,
+                resolveDate: dateString2,
+                resolvedBy: req.user.name + " " + req.user.lastName,
+                resolverComment: req.body.resolverComment
+            });   
+        }else{
+            const res = await Item.updateOne({ _id: req.params.id }, { 
+                code: req.body.code,
+                name: req.body.name,
+                ammount: req.body.ammount,
+                boughtIn: req.body.boughtIn,
+                authorComment: req.body.authorComment,
+                resolved: true,
+                resolve: req.body.resolve,
+                resolveDate: dateString2,
+                resolvedBy: req.user.name + " " + req.user.lastName,
+                resolverComment: "Komentaro nėra."
+            });   
+        }
+        
     }else{
+        var dateObj = new Date();
+        var dateYear = dateObj.getFullYear();
+        var dateMonth = dateObj.getMonth() + 1;
+        if(dateMonth < 10){
+            dateMonth = "0" + dateMonth;
+        }
+        var dateDay = dateObj.getDate();
+        if(dateDay < 10){
+            dateDay = "0" + dateDay;
+        }
+        var dateString3 = dateYear + "-" + dateMonth + "-" + dateDay;
+        if(req.body.finisherComment.length > 0){
+            var finishComment = req.body.finisherComment;
+        }else{
+            var finishComment = "Komentaro Nėra."
+        }
         const res = await Item.updateOne({ _id: req.params.id }, { 
-            code: req.body.code,
-            name: req.body.name,
-            ammount: req.body.ammount,
-            boughtIn: req.body.boughtIn,
-            authorComment: req.body.authorComment,
-            resolved: true,
-            resolve: req.body.resolve,
-            resolveDate: dateString2,
-            resolvedBy: req.user.username,
-            resolverComment: req.body.resolverComment
-        });   
+            finished: true,
+            finishedBy: req.user.name + " " + req.user.lastName,
+            finishDate: dateString3,
+            finisherComment: finishComment            
+        });               
     }
     res.redirect("/activeReturns");
 });

@@ -4,13 +4,7 @@
 <div id="home-wrap-div">
     <div id="home-page-container">
         <div id="user-panel-container">
-            <div id="user-panel-header-container">Vartotojas</div>
-            <div id="user-panel-content-container">
-                <div id="user-panel-name" class="user-panel-info-field"><b>Jurgis Guščia</b></div>
-                <div id="user-panel-store" class="user-panel-info-field">PSKYR-260</div>
-                <div id="user-panel-position" class="user-panel-info-field">Prekių priėmėjas-išdavėjas</div> 
-                <div id="logout-href"><a href="/logout">Atsijugnti</a></div>
-            </div><br>
+            <%- include("../partials/userPanel.ejs"); %>
             
         </div>
         
@@ -22,18 +16,28 @@
                         <div class="item-edit-form-col-title">Grąžinimo informacija</div>
                         <div class="eidt-item-line-container">
                             <label for="code" class="edit-item-label-field">Kodas</label>
-                            <input type="text" name="code" autocomplete="off" class="edit-item-input-field" required value=<%= item.code %>>
+                            <input type="text" name="code" autocomplete="off" class="edit-item-input-field" <% if(item.resolved == true) { %> readonly <% } %> required value=<%= item.code %>>
                         </div>
                         <div class="eidt-item-line-container">
                             <label for="name" class="edit-item-label-field">Pavad.</label>
-                            <input type="text" name="name" autocomplete="off" class="edit-item-input-field" required value=<%= item.name %>>
+                            <input type="text" name="name" autocomplete="off" class="edit-item-input-field" <% if(item.resolved == true) { %> readonly <% } %> required value="<%=item.name%>">
                         </div>
                         <div class="eidt-item-line-container">
                             <label for="ammount" class="edit-item-label-field">Kiekis</label>
-                            <input type="number" name="ammount" autocomplete="off" class="edit-item-input-field" required value=<%= item.ammount %>>
+                            <input type="number" name="ammount" autocomplete="off" class="edit-item-input-field" <% if(item.resolved == true) { %> readonly <% } %> required value=<%= item.ammount %>>
                         </div>
                         <div class="eidt-item-line-container">
                             <label for="boughtIn" class="edit-item-label-field">Pirkta</label>
+                            <% if(item.resolved == true) {  %>
+                                <div class="resolve-info-info-field"> 
+                                    <% if(item.boughtIn === "0"){ %> Internetu <% } %>
+                                    <% if(item.boughtIn === "01"){ %> Jonavos g. <% } %>
+                                    <% if(item.boughtIn === "80"){ %> Draugystė <% } %>
+                                    <% if(item.boughtIn === "110"){ %> Mega <% } %>
+                                    <% if(item.boughtIn === "260"){ %> Kaišiadorys <% } %>
+                                    <% if(item.boughtIn === "999"){ %> Kita <% } %>
+                                </div>
+                            <% } else { %>
                             <select name="boughtIn" size="1" required autocomplete="off" class="edit-item-input-field">
                                 <option value="0" <% if(item.boughtIn === "0"){ %> selected <% } %> >Internetu</option>
                                 <option value="01" <% if(item.boughtIn === "01"){ %> selected <% } %> >Jonavos g.</option>
@@ -42,16 +46,17 @@
                                 <option value="260" <% if(item.boughtIn === "260"){ %> selected <% } %> >Kaišiadorys</option>
                                 <option value="999" <% if(item.boughtIn === "999"){ %> selected <% } %> >Kita</option>
                             </select>
+                        <% } %>
                         </div>
                         <div class="eidt-item-line-container">
                             <label for="authorUser" class="edit-item-label-field">Sukurė</label>
-                            <input type="text" name="authorUser" autocomplete="off" class="edit-item-input-field" readonly required value=<%= item.authorUser %>>
+                            <input type="text" name="authorUser" autocomplete="off" class="edit-item-input-field" readonly required value="<%= item.authorUser %>">
                         </div>
                         <div class="eidt-item-line-container">
                             <label for="addDate" class="edit-item-label-field">Data</label>
                             <input type="text" name="addDate" autocomplete="off" class="edit-item-input-field" readonly required value=<%= item.addDate %>>
                         </div>
-                        <textarea id="author-comment-area" name="authorComment" autocomplete="off" placeholder="Komentaras"><%= item.authorComment %></textarea>   
+                        <textarea id="author-comment-area" name="authorComment" autocomplete="off" placeholder="Komentaras" <% if(item.resolved == true) { %> readonly <% } %>><%= item.authorComment %></textarea>   
                         
                     </div>
                 
@@ -70,15 +75,23 @@
                             <div class="resolve-info-info-field"><% if(item.resolved == true){ %> <%= item.resolveDate %> <% }else{ %> --- <% } %></div>
                         </div>
                         <div class="resolve-info-line-container">
-                            <textarea name="resolverComment" placeholder="Komentaras" id="resolver-comment-area" ><% if(item.resolved == true){ %> <%= item.resolverComment %> <%}%></textarea>
+                            <textarea name="resolverComment" placeholder="Komentaras" id="resolver-comment-area" <% if(item.finished == true) { %> readonly <% } %> ><% if(item.resolved == true){%><%= item.resolverComment %><%}%></textarea>
                         </div>
                         <div class="resolve-info-line-container">
-                            <label for="resolve">Sprendimas:</label>
+                            <% if(item.finished == true) { %>
+                                <div class="resolve-info-label-field">Sprendimas:</div>
+                                <div class="resolve-info-info-field">
+                                    <% if(item.resolve === "export"){ %> Išvežti <% } %>
+                                    <% if(item.resolve === "return"){ %> Grąžinti į skyrių<% } %>
+                                </div>
+                            <% } else{ %>
+                            <div class="resolve-info-label-field">Sprendimas:</div>
                             <select id="select-resolve" name="resolve" size="1" autocomplete="off">
                                 <option value="0" selected="selected"></option>
-                                <option value="export">Išvežti</option>
-                                <option value="return">Grąžinti į skyrių</option>
+                                <option value="export" <% if(item.resolve == "export") { %> selected <% } %>>Išvežti</option>
+                                <option value="return" <% if(item.resolve == "return") { %> selected <% } %>>Grąžinti į skyrių</option>
                             </select>
+                            <% } %>
                         </div>
                     </div>
 
@@ -86,47 +99,29 @@
                         <div class="item-edit-form-col-title">Užbaigimo informacija</div>
                         <div class="resolve-info-line-container">
                             <div class="resolve-info-label-field">Užbaigta:</div>
-                            <div class="resolve-info-info-field"></div>
+                            <div class="resolve-info-info-field"><% if(item.finished == true){ %> Taip <% }else{ %> Ne <% } %></div>
                         </div>
                         <div class="resolve-info-line-container">
                             <div class="resolve-info-label-field">Autorius:</div>
-                            <div class="resolve-info-info-field"></div>
+                            <div class="resolve-info-info-field"><% if(item.finished == true){ %> <%= item.finishedBy  %>  <% }else{ %> --- <% } %></div>
                         </div>
                         <div class="resolve-info-line-container">
                             <div class="resolve-info-label-field">Užbaigimo data:</div>
-                            <div class="resolve-info-info-field"></div>
+                            <div class="resolve-info-info-field"><% if(item.finished == true){ %> <%= item.finishDate %> <% }else{ %> --- <% } %></div>
                         </div>
                         <div class="resolve-info-line-container">
-                            <textarea name="finisherComment" placeholder="Komentaras" id="finisher-comment-area" ><% if(item.resolved == true){ %> <%= item.resolverComment %> <%}%></textarea>
+                            <textarea name="finisherComment" placeholder="Komentaras" id="finisher-comment-area" <% if(item.finished == true){ %> readonly <% } %>><% if(item.finished == true){ %> <%= item.finisherComment %> <%}%></textarea>
                         </div>
-                                  
+                        <div class="resolve-info-line-container">
+                            <div class="resolve-info-label-field">Užbaigti: </div>
+                            <input type="checkbox" id="finish" name="finish" <% if(item.resolved != true){ %> disabled <% } %> <% if(item.finished == true){ %> disabled checked <% } %>>                            
+                        </div>          
                     </div>
                 </form>
                 <div id="edit-item-form-control-container">
                     <button form="edit-item-form" class="btn btn-dark">Atnaujinti</button>
                     <div id="edit-item-form-cancel" class="btn btn-light">Atšaukti</div>
-                </div>
-            <!--
-                code 
-                name 
-                ammount
-                boughtIn
-                authorUser
-                addDate                
-                authorComment
-
-                resolved
-                resolveDate
-                resolvedBy
-                resolve
-                resolverComment
-
-                finished
-                finishDate
-                finishedBy
-                sinisherComment
-            -->
-                
+                </div>                
             </div>
         </div>
     </div>
