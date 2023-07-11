@@ -1,0 +1,74 @@
+<%- include("../partials/header"); %>
+<div id="back-drop" class="hidden"></div>
+
+<div id="home-wrap-div">
+    <div id="home-page-container">
+        <%- include("../partials/sideBarMenu.ejs"); %>
+        
+        <div id="home-page-content-area-container">
+            <%- include("../partials/navBar.ejs"); %>
+            <div id="edit-page-content-container">
+                <div class="edit-user-form-container">
+                    <form id="edit-user-form" action="<%= userToEdit._id %>" method="POST">
+                        <div class="user-main-info-container">
+                            <div class="user-main-control-line-container">
+                                <div class="user-main-control-line-label">Vartotojas</div>
+                                <input class="user-main-control-line-info" type="text" name="username" required autocomplete="off"  value="<%= userToEdit.username %>">
+                            </div>
+                            <div class="user-main-control-line-container">
+                                <div class="user-main-control-line-label">Vardas</div>
+                                <input class="user-main-control-line-info" type="text" name="name" required autocomplete="off" value="<%= userToEdit.name %>">
+                            </div>
+                            <div class="user-main-control-line-container">
+                                <div class="user-main-control-line-label">Pavardė</div>
+                                <input class="user-main-control-line-info" type="text" name="lastName" required autocomplete="off" value="<%= userToEdit.lastName %>">
+                            </div>
+                        </div>
+                        <div class="user-main-control-container">
+                            <div class="user-main-control-line-container">
+                                <div class="user-main-control-line-label">Padalinys:</div>
+                                <select name="store" size="1" required autocomplete="off" class="user-main-control-line-label">
+                                    <option value="26" selected>Kaišiadorys</option>
+                                </select>
+                            </div>
+                            <div class="user-main-control-line-container">
+                                <div class="user-main-control-line-label">Skyrius:</div>
+                                <select name="storePosition" size="1" required autocomplete="off" class="user-main-control-line-label">
+                                    <option value="99" <% if(userToEdit.storePosition == "99"){ %>selected <%}%>></option>
+                                    <option value="0" <% if(userToEdit.storePosition == "0"){ %>selected <%}%>>Administracija</option>
+                                    <option value="1" <% if(userToEdit.storePosition == "1"){ %>selected <%}%>>Kasos</option>
+                                    <option value="2" <% if(userToEdit.storePosition == "2"){ %>selected <%}%>>Skyrius</option>
+                                    <option value="3" <% if(userToEdit.storePosition == "3"){ %>selected <%}%>>PPG</option>
+                                </select>
+                            </div>
+                            <div class="user-main-control-line-container">
+                                <div class="user-main-control-line-label">Teisės:</div>
+                                <select name="webAcces" size="1" required autocomplete="off" class="user-main-control-line-label">
+                                    <option value="99" <% if(userToEdit.webAcces == "99"){ %>selected <%}%>></option>
+                                    <option value="0" <% if(userToEdit.webAcces == "0"){ %>selected <%}%>>Vartotojas</option>
+                                    <option value="1" <% if(userToEdit.webAcces == "1"){ %>selected <%}%>>Admin</option>
+                                </select>
+                            </div>
+                            <div class="user-main-control-line-container">
+                                <div class="user-main-control-line-label">Vartotojas patvirtintas:</div>
+                                <input type="checkbox" id="accountVerified" name="accountVerified" <% if(userToEdit.verifiedAccount === true) {%>checked<%}%>>
+                            </div>
+                            <div class="user-main-control-line-container">
+                                <div class="user-main-control-line-label">Paštas patvritintas:</div>
+                                <input type="checkbox" id="emailVerified" name="emailVerified" <% if(userToEdit.verifiedEmail === true) {%>checked<%}%>>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div id="edit-item-form-control-container">
+                    <button form="edit-user-form" class="btn btn-dark">Atnaujinti</button>
+                    <div id="edit-item-form-cancel" class="btn btn-light">Atšaukti</div>
+                </div><br>                
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+document.getElementById("user-control").classList.add("active-link");
+</script>
+<%- include("../partials/footer"); %>

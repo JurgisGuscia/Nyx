@@ -3,10 +3,7 @@
 
 <div id="home-wrap-div">
     <div id="home-page-container">
-        <div id="user-panel-container">
-            <%- include("../partials/userPanel.ejs"); %>
-            
-        </div>
+        <%- include("../partials/sideBarMenu.ejs"); %>
         
         <div id="home-page-content-area-container">
             <%- include("../partials/navBar.ejs"); %>
@@ -14,19 +11,19 @@
                 <form id="edit-item-form" action="/editItem/<%= item._id %>" method="POST">
                     <div id="return-info-container" class="item-edit-form-col">
                         <div class="item-edit-form-col-title">Grąžinimo informacija</div>
-                        <div class="eidt-item-line-container">
+                        <div class="edit-item-line-container">
                             <label for="code" class="edit-item-label-field">Kodas</label>
                             <input type="text" name="code" autocomplete="off" class="edit-item-input-field" <% if(item.resolved == true) { %> readonly <% } %> required value=<%= item.code %>>
                         </div>
-                        <div class="eidt-item-line-container">
+                        <div class="edit-item-line-container">
                             <label for="name" class="edit-item-label-field">Pavad.</label>
                             <input type="text" name="name" autocomplete="off" class="edit-item-input-field" <% if(item.resolved == true) { %> readonly <% } %> required value="<%=item.name%>">
                         </div>
-                        <div class="eidt-item-line-container">
+                        <div class="edit-item-line-container">
                             <label for="ammount" class="edit-item-label-field">Kiekis</label>
                             <input type="number" name="ammount" autocomplete="off" class="edit-item-input-field" <% if(item.resolved == true) { %> readonly <% } %> required value=<%= item.ammount %>>
                         </div>
-                        <div class="eidt-item-line-container">
+                        <div class="edit-item-line-container">
                             <label for="boughtIn" class="edit-item-label-field">Pirkta</label>
                             <% if(item.resolved == true) {  %>
                                 <div class="resolve-info-info-field"> 
@@ -48,11 +45,11 @@
                             </select>
                         <% } %>
                         </div>
-                        <div class="eidt-item-line-container">
+                        <div class="edit-item-line-container">
                             <label for="authorUser" class="edit-item-label-field">Sukurė</label>
                             <input type="text" name="authorUser" autocomplete="off" class="edit-item-input-field" readonly required value="<%= item.authorUser %>">
                         </div>
-                        <div class="eidt-item-line-container">
+                        <div class="edit-item-line-container">
                             <label for="addDate" class="edit-item-label-field">Data</label>
                             <input type="text" name="addDate" autocomplete="off" class="edit-item-input-field" readonly required value=<%= item.addDate %>>
                         </div>

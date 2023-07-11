@@ -1,0 +1,53 @@
+<%- include("../partials/header"); %>
+<div id="back-drop" class="hidden"></div>
+
+<div id="home-wrap-div">
+    <div id="home-page-container">
+        <div id="user-panel-container">
+            <%- include("../partials/userPanel.ejs"); %>
+            <% if(user.webAcces == "1") { %><%- include("../partials/adminMenu.ejs"); %> <%} %>
+        </div>
+        
+        <div id="home-page-content-area-container">
+            <%- include("../partials/navBar.ejs"); %>
+            <div id="home-page-content-container">
+                
+                
+                <% users.forEach(user =>{ %>
+                    <div class="user-line-container">
+                    <div id= <%= user._id %> class="single-user-container">
+                        <div class="single-user-info-container2"><%=user.username %></div>
+                        <div class="single-user-info-container"><%=user.name %></div>
+                        <div class="single-user-info-container"><%=user.lastName %></div>
+                        <div class="single-user-info-container">
+                            <% if(user.storePosition == "0"){%>Administracija<%}%>
+                            <% if(user.storePosition == "1"){%>Kasos<%}%>
+                            <% if(user.storePosition == "2"){%>Skyrius<%}%>
+                            <% if(user.storePosition == "3"){%>PPG<%}%>
+                        </div>
+                        <div class="single-user-info-container">
+                            <% if(user.webAcces == "0"){%>Vartotojas<%}%>
+                            <% if(user.webAcces == "1"){%>Admin<%}%>
+                        </div>
+                        <div class="single-user-info-container3">
+                            <% if(user.verifiedAccount == true){%>Verifeid Email<%}%>
+                            <% if(user.verifiedAccount == false){%>Unverified Email<%}%>
+                            <%=user.verifiedEmail %>
+                        </div>
+                        <div class="single-user-info-container3">
+                            <% if(user.verifiedAccount == true){%>Full account<%}%>
+                            <% if(user.verifiedAccount == false){%>Unverified<%}%>
+                        </div>
+                    </div>
+                </div>
+                <%});%>
+                
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    document.getElementById("user-control").classList.add("active-link");
+
+</script>
+<%- include("../partials/footer"); %>

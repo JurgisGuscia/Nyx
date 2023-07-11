@@ -13,10 +13,7 @@
 
 <div id="home-wrap-div">
     <div id="home-page-container">
-        <div id="user-panel-container">
-            <%- include("../partials/userPanel.ejs"); %>
-            <%- include("../partials/returnMenu.ejs"); %>
-        </div>
+        <%- include("../partials/sideBarMenu.ejs"); %>
         
         <div id="home-page-content-area-container">
             <%- include("../partials/navBar.ejs"); %>
@@ -29,7 +26,7 @@
                 </div>
                 
                 <% items.forEach(e =>{ %>
-                    <div class="item-line-container">
+                    <div class="edit-item-line-container">
                     <div id= <%= e._id %> class="single-item-container">
                         <div id="single-item-name-container"><%= e.name %></div>
                         <div id="single-item-code-container"><%= e.code %></div>                        
@@ -40,7 +37,7 @@
                     <button class="copy-to-clip-button"><img src="/img/icons/copy-icon.png"></button>
                 </div>
                 <%});%>
-                
+                <br>
             </div>
         </div>
     </div>

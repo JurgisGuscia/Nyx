@@ -40,17 +40,11 @@ const userSchema = new mongoose.Schema ({
     name: String,
     lastName: String,
     store: String,
-    storePosition: Number,
-    webAcces: Number,
+    storePosition: String,
+    webAcces: String,
     verifiedEmail: Boolean,
     verifiedAccount: Boolean
 });
-//store positions:
-//0 - Administracija
-//1 - Kasos
-//2 - Skyrius
-//3 - PPG
-
 
  const itemSchema = new mongoose.Schema ({
     addDate: {  //date item was return on, set as index
@@ -121,8 +115,8 @@ app.post("/register", async function(req, res){
                 name: req.body.name,
                 lastName: req.body.lastName,
                 store: req.body.store,
-                storePosition: "4",
-                webAcces: 0,
+                storePosition: "99",
+                webAcces: "99",
                 verifiedEmail: false,
                 verifiedAccount: false
             });
@@ -177,7 +171,6 @@ app.get("/register", checkNotAuthenticated, (req, res)=>{
 });
 
 
-// still need to edit item list filtration
 app.get("/activeReturns", checkAuthenticated, async function(req, res){
     const itemList = await Item.find({resolved: false || null}).exec();
     res.render("pages/activeReturns", {items: itemList, user: req.user});
@@ -229,12 +222,44 @@ app.post("/activeReturns", (req, res)=>{
     res.redirect("/activeReturns");
 });
 
-app.get("/editItem/:id", async (req,res)=>{
+app.get("/editItem/:id", checkAuthenticated, async (req,res)=>{
     const item = await Item.find({_id: req.params.id}).exec();
     res.render("pages/editItem", {item: item[0], user: req.user});
 });
 
-app.post("/editItem/:id", async(req, res)=>{
+app.get("/users", checkAuthenticated, async (req,res)=>{
+    const userList = await User.find().exec();
+    res.render("pages/userList", {users: userList, user: req.user});
+});
+
+app.get("/editUser/:id", checkAuthenticated, async(req,res)=>{
+    const userToEdit = await User.find({_id: req.params.id}).exec();
+    res.render("pages/editUser", {userToEdit: userToEdit[0], user: req.user});
+});
+
+app.post("/editUser/:id", checkAuthenticated, async(req,res)=>{
+    var verifyTheAccount = false;
+    var verifyTheEmail = false;
+    if(req.body.accountVerified){
+        verifyTheAccount = true;
+    }
+    if(req.body.emailVerified){
+        verifyTheEmail = true;
+    }
+    await User.updateOne({_id: req.params.id}, {
+        username: req.body.username,
+        name: req.body.name,
+        lastName: req.body.lastName,
+        store: req.body.store,
+        storePosition: req.body.storePosition,
+        webAcces: req.body.webAcces,
+        verifiedAccount: verifyTheAccount,
+        verifiedEmail: verifyTheEmail
+    });
+    res.redirect("/users");
+});
+
+app.post("/editItem/:id", checkAuthenticated, async(req, res)=>{
     var dateObj2  = new Date();
     var dateYear2 = dateObj2.getFullYear();
     var dateMonth2 = dateObj2.getMonth() + 1;

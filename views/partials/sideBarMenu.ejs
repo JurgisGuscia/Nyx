@@ -1,5 +1,5 @@
 <div id="user-panel-container">
     <%- include("../partials/userPanel.ejs"); %>
     <%- include("../partials/returnMenu.ejs"); %>
-    <% if(user.webAcces === 0) { %><%- include("../partials/adminMenu.ejs"); %> <%} %>
+    <% if(user.webAcces === "1") { %><%- include("../partials/adminMenu.ejs"); %> <%} %>
 </div>

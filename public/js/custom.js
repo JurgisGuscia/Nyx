@@ -55,10 +55,23 @@ function check() {
     window.location.replace("/activeReturns");
   });
 
+  $("#user-control").on("click", ()=>{
+    window.location.replace("/users");
+  });
+
   const activeItemList = document.querySelectorAll(".single-item-container");
   activeItemList.forEach(item =>{
     item.addEventListener("click", function(){
       window.location.replace("/editItem/" + item.id);
     })
   });
+
+  const activeUserList = document.querySelectorAll(".single-user-container");
+  activeUserList.forEach(user =>{
+    user.addEventListener("click", function(){
+      window.location.replace("/editUser/" + user.id);
+    })
+  });
+
+
   

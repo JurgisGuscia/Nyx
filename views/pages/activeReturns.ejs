@@ -14,7 +14,7 @@
                     <div id="single-item-date-container-header">Grąžinimo data</div>
                 </div>
                 <% items.forEach(e =>{ %>
-                    <div class="item-line-container">
+                    <div class="edit-item-line-container">
                     <div id= <%= e._id %> class="single-item-container">
                         <div id="single-item-name-container"><%= e.name %></div>
                         <div id="single-item-code-container"><%= e.code %></div>                        
@@ -24,7 +24,7 @@
                     <button class="copy-to-clip-button"><img src="/img/icons/copy-icon.png"></button>
                 </div>
                 <%});%>
-                
+                <br>
             </div>
         </div>
     </div>
