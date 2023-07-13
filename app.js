@@ -21,7 +21,7 @@ app.use(bodyParser.urlencoded({
 app.set('view engine', 'ejs');
 
 app.use(session({
-    secret: process.env.SESSION_SECRET,
+    secret: "this is my first session secret",
     resave: false,
     saveUninitialized: false
 }));
@@ -157,6 +157,16 @@ function checkNotAuthenticated(req, res, next){
     
 }
 
+function checkAdmin(req, res, next){
+    if(req.user.webAcces == "1"){
+        return next();
+        
+    }else{
+        res.redirect("/home");
+    }
+    
+}
+
 
 app.get("/home", checkAuthenticated, (req, res)=>{
     res.render("pages/home", {user: req.user});
@@ -227,7 +237,7 @@ app.get("/editItem/:id", checkAuthenticated, async (req,res)=>{
     res.render("pages/editItem", {item: item[0], user: req.user});
 });
 
-app.get("/users", checkAuthenticated, async (req,res)=>{
+app.get("/users", checkAuthenticated, checkAdmin, async (req,res)=>{
     const userList = await User.find().exec();
     res.render("pages/userList", {users: userList, user: req.user});
 });

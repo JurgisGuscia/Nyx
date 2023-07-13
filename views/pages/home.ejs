@@ -5,7 +5,7 @@
     <div id="home-page-container">
         <div id="user-panel-container">
             <%- include("../partials/userPanel.ejs"); %>
-            <% if(user.webAcces === 0) { %><%- include("../partials/adminMenu.ejs"); %> <%} %>
+            <% if(user.webAcces == "1") { %><%- include("../partials/adminMenu.ejs"); %> <%} %>
         </div>
         
         <div id="home-page-content-area-container">
