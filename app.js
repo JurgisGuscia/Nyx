@@ -1,5 +1,5 @@
 require('dotenv').config()
-var sslRedirect = require('heroku-ssl-redirect');
+var sslRedirect = require('heroku-ssl-redirect').default;
 const express = require("express");
 const ejs = require("ejs");
 const bodyParser = require("body-parser");
@@ -349,7 +349,7 @@ app.post("/editItem/:id", checkAuthenticated, async(req, res)=>{
 });
 
 app.listen(process.env.PORT, (req, res)=>{
-    console.log("server listening on port 3000");
+    console.log("server started");
 });
 
 
