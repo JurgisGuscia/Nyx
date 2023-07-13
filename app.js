@@ -29,7 +29,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-mongoose.connect("mongodb://0.0.0.0:27017/nyxDB");
+mongoose.connect(process.env.MONGODB_URI);
 
 const userSchema = new mongoose.Schema ({
     username: {
