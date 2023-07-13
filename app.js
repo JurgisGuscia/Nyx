@@ -347,7 +347,7 @@ app.post("/editItem/:id", checkAuthenticated, async(req, res)=>{
     res.redirect("/activeReturns");
 });
 
-app.listen(3000, (req, res)=>{
+app.listen(PORT, (req, res)=>{
     console.log("server listening on port 3000");
 });
 
