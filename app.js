@@ -1,4 +1,5 @@
 require('dotenv').config()
+var sslRedirect = require('heroku-ssl-redirect');
 const express = require("express");
 const ejs = require("ejs");
 const bodyParser = require("body-parser");
@@ -11,7 +12,7 @@ const bcrypt = require("bcrypt");
 const saltRounds = 10;
 
 const app = express();
-
+app.use(sslRedirect());
 app.use(express.static(__dirname + "/public"));
 
 app.use(bodyParser.urlencoded({
