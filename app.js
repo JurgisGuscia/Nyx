@@ -126,6 +126,9 @@ app.post("/register", async function(req, res){
     }
 });
 
+
+
+
 app.post("/", passport.authenticate("local", {
     successRedirect: "/home",
     failureRedirect: "/"
@@ -138,6 +141,23 @@ app.get("/logout", (req, res)=>{
     
 });
 
+function checkVerifiedUser(req, res, next){
+    if(req.user.verifiedAccount === true){
+        return next();
+    }else{
+        res.redirect("/unverifiedUser");
+    }
+    
+}
+
+function checkNotVerifiedUser(req, res, next){
+    if(req.user.verifiedAccount === false){
+        return next();
+    }else{
+        res.redirect("/home");
+    }
+    
+}
 
 
 function checkAuthenticated(req, res, next){
@@ -161,7 +181,6 @@ function checkNotAuthenticated(req, res, next){
 function checkAdmin(req, res, next){
     if(req.user.webAcces == "1"){
         return next();
-        
     }else{
         res.redirect("/home");
     }
@@ -169,7 +188,8 @@ function checkAdmin(req, res, next){
 }
 
 
-app.get("/home", checkAuthenticated, (req, res)=>{
+
+app.get("/home", checkAuthenticated, checkVerifiedUser, (req, res)=>{
     res.render("pages/home", {user: req.user});
 });
 
@@ -177,27 +197,40 @@ app.get("/", checkNotAuthenticated, (req, res)=>{
     res.render("pages/login");
 });
 
+app.get("/login", checkNotAuthenticated, (req, res)=>{
+    res.render("pages/login");
+});
+
+app.get("/re-login", (req, res)=>{
+    req.logOut((err)=>{
+        res.redirect("/");
+    });
+});
+
 app.get("/register", checkNotAuthenticated, (req, res)=>{
     res.render("pages/register");
 });
 
+app.get("/unverifiedUser", checkNotVerifiedUser, (req,res)=>{
+    res.render("pages/unverifiedUser");
+});
 
-app.get("/activeReturns", checkAuthenticated, async function(req, res){
+app.get("/activeReturns", checkAuthenticated, checkVerifiedUser, async function(req, res){
     const itemList = await Item.find({resolved: false || null}).exec();
     res.render("pages/activeReturns", {items: itemList, user: req.user});
 });
 
-app.get("/awaitingExport", checkAuthenticated, async function(req, res){
+app.get("/awaitingExport", checkAuthenticated, checkVerifiedUser, async function(req, res){
     const itemList = await Item.find({resolved: true, resolve: "export", finished : false || null}).exec();
     res.render("pages/awaitingExport", {items: itemList, user: req.user});
 });
 
-app.get("/awaitingReturn", checkAuthenticated, async function(req, res){
+app.get("/awaitingReturn", checkAuthenticated, checkVerifiedUser, async function(req, res){
     const itemList = await Item.find({resolved: true, resolve: "return", finished : false || null}).exec();
     res.render("pages/awaitingReturn", {items: itemList, user: req.user});
 });
 
-app.get("/completedReturns", checkAuthenticated, async function(req, res){
+app.get("/completedReturns", checkAuthenticated, checkVerifiedUser, async function(req, res){
     const itemList = await Item.find({finished: true}).exec();
     res.render("pages/completedReturns", {items: itemList, user: req.user});
 });
@@ -233,7 +266,7 @@ app.post("/activeReturns", (req, res)=>{
     res.redirect("/activeReturns");
 });
 
-app.get("/editItem/:id", checkAuthenticated, async (req,res)=>{
+app.get("/editItem/:id", checkAuthenticated, checkVerifiedUser, async (req,res)=>{
     const item = await Item.find({_id: req.params.id}).exec();
     res.render("pages/editItem", {item: item[0], user: req.user});
 });
@@ -243,7 +276,7 @@ app.get("/users", checkAuthenticated, checkAdmin, async (req,res)=>{
     res.render("pages/userList", {users: userList, user: req.user});
 });
 
-app.get("/editUser/:id", checkAuthenticated, async(req,res)=>{
+app.get("/editUser/:id", checkAuthenticated, checkVerifiedUser, async(req,res)=>{
     const userToEdit = await User.find({_id: req.params.id}).exec();
     res.render("pages/editUser", {userToEdit: userToEdit[0], user: req.user});
 });

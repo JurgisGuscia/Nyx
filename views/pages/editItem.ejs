@@ -1,10 +1,8 @@
 <%- include("../partials/header"); %>
 <div id="back-drop" class="hidden"></div>
-
 <div id="home-wrap-div">
     <div id="home-page-container">
         <%- include("../partials/sideBarMenu.ejs"); %>
-        
         <div id="home-page-content-area-container">
             <%- include("../partials/navBar.ejs"); %>
             <div id="edit-page-content-container">
@@ -54,9 +52,7 @@
                             <input type="text" name="addDate" autocomplete="off" class="edit-item-input-field" readonly required value=<%= item.addDate %>>
                         </div>
                         <textarea id="author-comment-area" name="authorComment" autocomplete="off" placeholder="Komentaras" <% if(item.resolved == true) { %> readonly <% } %>><%= item.authorComment %></textarea>   
-                        
                     </div>
-                
                     <div id="resolve-info-container" class="item-edit-form-col">
                         <div class="item-edit-form-col-title">Sprendimo informacija</div>
                         <div class="resolve-info-line-container">
@@ -91,7 +87,6 @@
                             <% } %>
                         </div>
                     </div>
-
                     <div id="completed-info-container" class="item-edit-form-col">
                         <div class="item-edit-form-col-title">Užbaigimo informacija</div>
                         <div class="resolve-info-line-container">

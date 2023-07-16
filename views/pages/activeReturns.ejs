@@ -13,7 +13,7 @@
                     <div id="single-item-ammount-container-header">Kiekis</div>
                     <div id="single-item-date-container-header">Grąžinimo data</div>
                 </div>
-                <% items.forEach(e =>{ %>
+                <% items.slice().reverse().forEach(e =>{ %>
                     <div class="edit-item-line-container">
                     <div id= <%= e._id %> class="single-item-container">
                         <div id="single-item-name-container"><%= e.name %></div>

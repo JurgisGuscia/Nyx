@@ -1,20 +1,9 @@
 <%- include("../partials/header"); %>
 <div id="back-drop" class="hidden"></div>
-
-<!-- ==================================================Add new item form================================================== -->
 <%- include("../partials/addNewItemForm.ejs"); %>
-
-<!-- ====================================================Edit item form==========-======================================== -->
-
-
-
-
-
-
 <div id="home-wrap-div">
     <div id="home-page-container">
         <%- include("../partials/sideBarMenu.ejs"); %>
-        
         <div id="home-page-content-area-container">
             <%- include("../partials/navBar.ejs"); %>
             <div id="home-page-content-container">
@@ -24,15 +13,13 @@
                     <div id="single-item-ammount-container-header">Kiekis</div>
                     <div id="single-item-date-container-header">Grąžinimo data</div>
                 </div>
-                
-                <% items.forEach(e =>{ %>
+                <% items.slice().reverse().forEach(e =>{ %>
                     <div class="edit-item-line-container">
                     <div id= <%= e._id %> class="single-item-container">
                         <div id="single-item-name-container"><%= e.name %></div>
                         <div id="single-item-code-container"><%= e.code %></div>                        
                         <div id="single-item-ammount-container"><%= e.ammount %></div>
-                        <div id="single-item-date-container"><%= e.addDate %></div>
-                        
+                        <div id="single-item-date-container"><%= e.addDate %></div>  
                     </div>
                     <button class="copy-to-clip-button"><img src="/img/icons/copy-icon.png"></button>
                 </div>

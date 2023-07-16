@@ -1,24 +1,20 @@
 <%- include("../partials/header"); %>
 <div id="back-drop" class="hidden"></div>
-
 <div id="home-wrap-div">
     <div id="home-page-container">
         <div id="user-panel-container">
             <%- include("../partials/userPanel.ejs"); %>
             <% if(user.webAcces == "1") { %><%- include("../partials/adminMenu.ejs"); %> <%} %>
         </div>
-        
         <div id="home-page-content-area-container">
             <%- include("../partials/navBar.ejs"); %>
             <div id="home-page-content-container">
-                No activity today
-                
+                No activity today          
             </div>
         </div>
     </div>
 </div>
 <script>
     document.getElementById("main-home-link").classList.add("active-link");
-
 </script>
 <%- include("../partials/footer"); %>

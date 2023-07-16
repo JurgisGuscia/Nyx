@@ -20,10 +20,11 @@ function check() {
     $("#add-new-item-form-container").toggleClass("hidden");
     
   });
-  var rows = $('.item-line-container');
+
+
+  var rows = $('.edit-item-line-container');
   for (var i = 0; i < rows.length; i++){
     var button = rows[i].querySelector('button');
-    
     button.addEventListener('click', function(e){
       var link = e.target.closest('div').getElementsByTagName('div')[2].innerText;
       var tempText = document.createElement('textarea');
