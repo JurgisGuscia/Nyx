@@ -422,25 +422,27 @@
     padding-left: 5px;
 }
 .copy-to-clip-button{
-    width: 30px;
-    height: 30px;
+    width: 20px;
+    height: 20px;
     display: inline-block;
     border: none;
     background-color: transparent;
+    margin-right: 5px;
 }
 .copy-to-clip-button > img{
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
     transition: ease-in-out 0.1s;
 }
 .copy-to-clip-button > img:hover{
-    width: 23px;
-    height: 23px;
+    transform:rotate(0.03turn);
     cursor: pointer;
     transition: ease-in-out 0.1s;
 }
 .active-link{
-    background-color: var(--contrast);
+    border-left:solid var(--contrast) 15px;
+    border-right:solid var(--contrast) 15px;
+    /* background-color: var(--contrast); */
 }
 #edit-item-form{
     height: 100%;

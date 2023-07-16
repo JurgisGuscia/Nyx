@@ -22,9 +22,11 @@
                         <div id="single-item-date-container"><%= e.addDate %></div>
                     </div>
                     <button class="copy-to-clip-button"><img src="/img/icons/copy-icon.png"></button>
+                    <input class="select-item-row-for-action" type="checkbox">
                 </div>
                 <%});%>
-                <br>
+                <div id="button-for-item-action-testing">Test</div>
+                <!-- <form action="/sendItemListEmail" method="POST"><button type="submit">Siųsti</button><inpyt</form> -->
             </div>
         </div>
     </div>
@@ -43,3 +45,15 @@
 
 <%- include("../partials/footer"); %>
 <script src="/js/copyCode.js"></script>
+<script src="/js/itemsForActions.js"></script>
+<script>
+    $("#button-for-item-action-testing").on("click", ()=>{
+        var items = actionWithSelectedItems();
+        fetch("/sendItemListEmail",
+        {method:"post", 
+            body: JSON.stringify(items),
+            headers: {
+            'Content-Type': 'application/json'
+            }});
+    })
+</script>

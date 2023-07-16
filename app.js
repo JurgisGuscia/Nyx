@@ -9,11 +9,13 @@ const session = require("express-session");
 const passport = require("passport");
 const passportLocalMongoose = require("passport-local-mongoose");
 const bcrypt = require("bcrypt");
+const Mailjet = require("node-mailjet");
 const saltRounds = 10;
 
 const app = express();
 app.use(sslRedirect());
 app.use(express.static(__dirname + "/public"));
+app.use(express.json());
 
 app.use(bodyParser.urlencoded({
     extended: false
@@ -31,6 +33,11 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 mongoose.connect(process.env.MONGODB_URI);
+
+const mailjet = new Mailjet({
+    apiKey: process.env.MJ_APIKEY_PUBLIC,
+    apiSecret: process.env.MJ_APIKEY_PRIVATE
+});
 
 const userSchema = new mongoose.Schema ({
     username: {
@@ -234,6 +241,53 @@ app.get("/completedReturns", checkAuthenticated, checkVerifiedUser, async functi
     const itemList = await Item.find({finished: true}).exec();
     res.render("pages/completedReturns", {items: itemList, user: req.user});
 });
+
+
+
+
+
+app.post("/sendItemListEmail", (req, res)=>{
+    const items = req.body;
+    var echoString;
+    echoString = "<table>";
+    items.forEach((e)=>{
+        echoString = echoString + "<tr><td style='width:100px'>" + e.code + "</td><td>" + e.name + "</td><td>" + e.ammount + "<td></tr>"
+    });
+    echoString = echoString + "</table>";
+    const request = mailjet
+        .post('send', { version: 'v3.1' })
+        .request({
+          Messages: [
+            {
+              From: {
+                Email: "NyxPlatform@mail.com",
+                Name: "NyxPlatform"
+              },
+              To: [
+                {
+                  Email: req.user.username,
+                }
+              ],
+              Subject: "Prekių sąrašas",
+              htmlPart: echoString,
+            }
+          ]
+        })
+
+request
+    .then((result) => {
+        res.redirect("/activeReturns")
+    })
+    .catch((err) => {
+        res.redirect("/activeReturns")
+    })
+});
+
+
+
+
+
+
 
 
 app.post("/activeReturns", (req, res)=>{

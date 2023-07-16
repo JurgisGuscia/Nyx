@@ -19,7 +19,7 @@
                         </div>
                         <div class="edit-item-line-container">
                             <label for="ammount" class="edit-item-label-field">Kiekis</label>
-                            <input type="number" name="ammount" autocomplete="off" class="edit-item-input-field" <% if(item.resolved == true) { %> readonly <% } %> required value=<%= item.ammount %>>
+                            <input type="number" name="ammount" step="0.001" autocomplete="off" class="edit-item-input-field" <% if(item.resolved == true) { %> readonly <% } %> required value=<%= item.ammount %>>
                         </div>
                         <div class="edit-item-line-container">
                             <label for="boughtIn" class="edit-item-label-field">Pirkta</label>

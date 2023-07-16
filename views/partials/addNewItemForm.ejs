@@ -2,7 +2,7 @@
     <form id="add-new-item-form" action="/activeReturns" method="POST">
         <div class="new-item-input-container"><input type="text" name="itemCode" placeholder="Kodas" required autocomplete="off"></div>
         <div class="new-item-input-container"><input type="text" name="itemName" placeholder="Pavadinimas" required autocomplete="off"></div>
-        <div class="new-item-input-container"><input type="number" name="itemCount" placeholder="Kiekis" required autocomplete="off"></div>
+        <div class="new-item-input-container"><input type="number" step="0.001" name="itemCount" placeholder="Kiekis" required autocomplete="off"></div>
         <div  class="new-item-input-container">
             <label id="boughIn-label" for="boughtIn">Pirkta:</label>
             <select id="boughtIn" name="boughtIn" size="1" required autocomplete="off">
