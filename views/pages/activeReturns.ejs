@@ -25,8 +25,18 @@
                     <input class="select-item-row-for-action" type="checkbox">
                 </div>
                 <%});%>
-                <div id="button-for-item-action-testing">Test</div>
-                <!-- <form action="/sendItemListEmail" method="POST"><button type="submit">Siųsti</button><inpyt</form> -->
+                
+            </div>
+        </div>
+        <div id="right-side-panel-container">
+            <div id="right-side-menu-container">
+                <div id="functions-panel-header-container">Sąrašo formavimas</div>
+                <div id="functions-panel-content-container">
+                    <div><input type="checkbox" name="require-item-code" id="require-item-code" class="require-item-info-checkbox" checked><label for="require-item-code">Kodas</label></div>
+                    <div><input type="checkbox" name="require-item-name" id="require-item-name"  class="require-item-info-checkbox" checked><label for="require-item-name">Pavadinimas</label></div>
+                    <div><input type="checkbox" name="require-item-ammount" id="require-item-ammount" class="require-item-info-checkbox" checked><label for="require-item-ammount">Kiekis</label></div>
+                    <div id="button-for-item-list-forming" class="add-new-item-button">Gauti pažymėtų sąrašą</div>
+                </div>
             </div>
         </div>
     </div>
@@ -47,13 +57,28 @@
 <script src="/js/copyCode.js"></script>
 <script src="/js/itemsForActions.js"></script>
 <script>
-    $("#button-for-item-action-testing").on("click", ()=>{
+    $("#button-for-item-list-forming").on("click", ()=>{
+        
         var items = actionWithSelectedItems();
-        fetch("/sendItemListEmail",
-        {method:"post", 
-            body: JSON.stringify(items),
-            headers: {
-            'Content-Type': 'application/json'
-            }});
+        if(items.length < 1){
+            console.log("No items were selected.");
+        }else{
+            const listSettings = {
+                requiresCode : $("#require-item-code")[0].checked,
+                requiresName : $("#require-item-name")[0].checked,
+                requiresAmmount : $("#require-item-ammount")[0].checked
+            };
+            if(listSettings.requiresCode == true || listSettings.requiresName == true || listSettings.requiresAmmount == true){
+                items.unshift(listSettings);
+                fetch("/sendItemListEmail",
+                {method:"post", 
+                    body: JSON.stringify(items),
+                    headers: {
+                    'Content-Type': 'application/json'
+                    }});
+            }else{
+                console.log("no settings were activated.");
+            }
+        }
     })
 </script>

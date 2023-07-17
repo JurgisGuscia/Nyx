@@ -250,8 +250,27 @@ app.post("/sendItemListEmail", (req, res)=>{
     const items = req.body;
     var echoString;
     echoString = "<table>";
+    var addCode = items[0].requiresCode;
+    var addName = items[0].requiresName;
+    var addAmmount = items[0].requiresAmmount;
+    var counter = 0;
     items.forEach((e)=>{
-        echoString = echoString + "<tr><td style='width:100px'>" + e.code + "</td><td>" + e.name + "</td><td>" + e.ammount + "<td></tr>"
+        counter++;
+        if(counter == 1){
+            //skip first array item, it contains list settings
+        }else{
+            echoString = echoString + "<tr>";
+            if(addCode){
+                echoString = echoString + "<td style='width:100px'>" + e.code + "</td>";
+            }
+            if(addName){
+                echoString = echoString + "<td>" + e.name + "</td>";
+            }
+            if(addAmmount){
+                echoString = echoString + "<td>" + e.ammount + "</td>";
+            }
+            echoString = echoString + "</tr>";
+        }
     });
     echoString = echoString + "</table>";
     const request = mailjet
