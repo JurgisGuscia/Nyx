@@ -41,7 +41,16 @@ function check() {
   });
   
   $("#edit-item-form-cancel").on("click", ()=>{
-    window.location.replace("/activeReturns");
+    if($("#item-is-finished")[0].innerText == "Taip"){
+      window.location.replace("/completedReturns");
+    }else if($("#item-has-resolve")[0].innerText === "Išvežti"){
+      window.location.replace("/awaitingExport");
+    }else if($("#item-has-resolve")[0].innerText === "Grąžinti į skyrių"){
+      window.location.replace("/awaitingReturn");
+    }else{
+      window.location.replace("/activeReturns");
+    }
+       
   });
 
   $("#user-control").on("click", ()=>{

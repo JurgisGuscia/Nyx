@@ -57,7 +57,7 @@
                         <div class="item-edit-form-col-title">Sprendimo informacija</div>
                         <div class="resolve-info-line-container">
                             <div class="resolve-info-label-field">Sprendimas:</div>
-                            <div class="resolve-info-info-field"><% if(item.resolved == true){ if(item.resolve === "export"){ %> Išvežti <% }else{ %> Grąžinti į skyrių<% } }else{ %> Nėra <% } %></div>
+                            <div id="item-has-resolve" class="resolve-info-info-field"><% if(item.resolved == true){ if(item.resolve === "export"){ %>Išvežti <% }else{ %>Grąžinti į skyrių<% } }else{ %>Nėra <% } %></div>
                         </div>
                         <div class="resolve-info-line-container">
                             <div class="resolve-info-label-field">Autorius:</div>
@@ -73,7 +73,7 @@
                         <div class="resolve-info-line-container">
                             <% if(item.finished == true) { %>
                                 <div class="resolve-info-label-field">Sprendimas:</div>
-                                <div class="resolve-info-info-field">
+                                <div  class="resolve-info-info-field">
                                     <% if(item.resolve === "export"){ %> Išvežti <% } %>
                                     <% if(item.resolve === "return"){ %> Grąžinti į skyrių<% } %>
                                 </div>
@@ -91,7 +91,7 @@
                         <div class="item-edit-form-col-title">Užbaigimo informacija</div>
                         <div class="resolve-info-line-container">
                             <div class="resolve-info-label-field">Užbaigta:</div>
-                            <div class="resolve-info-info-field"><% if(item.finished == true){ %> Taip <% }else{ %> Ne <% } %></div>
+                            <div id="item-is-finished" class="resolve-info-info-field"><% if(item.finished == true){ %>Taip<% }else{ %>Ne<% } %></div>
                         </div>
                         <div class="resolve-info-line-container">
                             <div class="resolve-info-label-field">Autorius:</div>
