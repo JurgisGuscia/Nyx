@@ -39,6 +39,10 @@ function check() {
   $("#completed-returns").on("click", ()=>{
     window.location.replace("/completedReturns");
   });
+
+  $("#edit-user-form-cancel").on("click", ()=>{
+    window.location.replace("/users");
+  });
   
   $("#edit-item-form-cancel").on("click", ()=>{
     if($("#item-is-finished")[0].innerText == "Taip"){

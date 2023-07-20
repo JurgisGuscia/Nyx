@@ -26,9 +26,8 @@
                             <% if(user.webAcces == "1"){%>Admin<%}%>
                         </div>
                         <div class="single-user-info-container3">
-                            <% if(user.verifiedAccount == true){%>Verified Email<%}%>
-                            <% if(user.verifiedAccount == false){%>Unverified Email<%}%>
-                            <%=user.verifiedEmail %>
+                            <% if(user.verifiedEmail == true){%>Verified Email<%}%>
+                            <% if(user.verifiedEmail == false){%>Unverified Email<%}%>
                         </div>
                         <div class="single-user-info-container3">
                             <% if(user.verifiedAccount == true){%>Full account<%}%>

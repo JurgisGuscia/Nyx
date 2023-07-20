@@ -666,3 +666,61 @@
 .require-item-info-checkbox{
     margin-right: 10px;
 }
+#home-page-return-info-container{
+    width: 760px;
+    height: 200px;
+    margin: auto;
+    margin-bottom: 10px;
+}
+#home-page-return-info-title{
+    width: 100%;
+    text-align: center;
+    height: 25px;
+}
+.home-page-return-info-line-container{
+    width: 100%;
+    height: 25px;
+    margin-top: 10px;
+    
+}
+.home-page-return-info-line-title{
+    width: 200px;
+    height: 100%;
+    font-size: 0.9rem;
+    display: inline-block;
+}
+.home-page-return-info-line-content{
+    width: 100px;
+    height: 100%;
+    font-size: 0.9rem;
+    display: inline-block;
+}
+#merch-cards-container{
+    width: 100%;
+    min-height: 300px;
+}
+.merch-card{
+    padding-top: 10px;
+    display: inline-block;
+    width: 240px;
+    height: 300px;
+    border: solid 1px var(--primary);
+    border-radius: 10px;
+    margin: 10px;
+    flex-shrink: 0;
+    vertical-align: top;
+    text-align: center;    
+    box-shadow: 7px 6px 10px -2px rgba(19,19,19,0.75);
+    -webkit-box-shadow: 7px 6px 10px -2px rgba(19,19,19,0.75);
+    -moz-box-shadow: 7px 6px 10px -2px rgba(19,19,19,0.75);
+    transition: ease-in-out 0.1s;
+}
+.merch-card > img{
+    height: 200px;
+    margin: auto;
+    margin-bottom: 10px;
+}
+.merch-card:hover{
+    transform: scale(1.05);
+    transition: ease-in-out 0.1s;
+}

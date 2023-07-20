@@ -9,6 +9,30 @@
         <div id="home-page-content-area-container">
             <%- include("../partials/navBar.ejs"); %>
             <div id="home-page-content-container">
+                <div id="home-page-return-info-container">
+                    <div id="home-page-return-info-title">
+                        <h5>Grąžinimų informacija</h5>
+                    </div>
+                    <div class="home-page-return-info-line-container">
+                        <div class="home-page-return-info-line-title">Nauji grąžinimai:</div>
+                        <div class="home-page-return-info-line-content"><%=stats.new.length%></div>
+                    </div>
+                    <div class="home-page-return-info-line-container">
+                        <div class="home-page-return-info-line-title">Laukiantys išvežimo:</div>
+                        <div class="home-page-return-info-line-content"><%=stats.export.length%></div>
+                    </div>
+                    <div class="home-page-return-info-line-container">
+                        <div class="home-page-return-info-line-title">Laukiantys perkėlimo į skyrių:</div>
+                        <div class="home-page-return-info-line-content"><%=stats.return.length%></div>
+                    </div>
+                    <div class="home-page-return-info-line-container">
+                        <div class="home-page-return-info-line-title">Užbaigti:</div>
+                        <div class="home-page-return-info-line-content"><%=stats.completed.length%></div>
+                    </div>
+                </div>
+
+
+
                 <!-- 
                     active return count
                     awaiting export count
@@ -17,8 +41,13 @@
 
                     paieska
 
+                    prekiu korteles kasininkems
+
+                    priemimo taros sarasu formavimas
+
+                    broku saraso formavimas ikelti preke, kieki, aprasyma ir foto 
                     
-                    
+
 
                 -->
             </div>

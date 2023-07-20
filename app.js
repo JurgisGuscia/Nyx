@@ -196,8 +196,18 @@ function checkAdmin(req, res, next){
 
 
 
-app.get("/home", checkAuthenticated, checkVerifiedUser, (req, res)=>{
-    res.render("pages/home", {user: req.user});
+app.get("/home", checkAuthenticated, checkVerifiedUser, async (req, res)=>{
+    var stats = {
+        new: Number,
+        export: Number,
+        return: Number,
+        completed: Number
+    };
+    stats.new = await Item.find({resolved: false || null}).exec();
+    stats.export = await Item.find({resolve: "export", finished: false || null}).exec();
+    stats.return = await Item.find({resolve: "return", finished: false || null}).exec();
+    stats.completed = await Item.find({finished: true}).exec();
+    res.render("pages/home", {user: req.user, stats: stats});
 });
 
 app.get("/", checkNotAuthenticated, (req, res)=>{
@@ -217,6 +227,11 @@ app.get("/re-login", (req, res)=>{
 app.get("/register", checkNotAuthenticated, (req, res)=>{
     res.render("pages/register");
 });
+
+app.get("/merchCards", checkAuthenticated, (req, res)=>{
+    res.render("pages/cards", {user: req.user});
+});
+
 
 app.get("/unverifiedUser", checkNotVerifiedUser, (req,res)=>{
     res.render("pages/unverifiedUser");
