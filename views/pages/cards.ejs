@@ -1,4 +1,5 @@
 <%- include("../partials/header"); %>
+<script src="/js/errorMessageHandling.js"></script>
 <div id="back-drop" class="hidden"></div>
 <div id="home-wrap-div">
     <div id="home-page-container">
@@ -10,25 +11,70 @@
             <%- include("../partials/navBar.ejs"); %>
             <div id="home-page-content-container">
                 <div id="merch-cards-container">
-                    <div class="merch-card">
+                    <div id="50871682" class="merch-card">
                         <img src="/img/images/50871682.bmp">
                         <div class="merch-card-text"><b>Žemė kapams Durpeta, 50 l</b></div>
                     </div>
-                    <div class="merch-card">
-                        
+                    <div id="51204501" class="merch-card">
+                        <img src="/img/images/51204501.bmp">
+                        <div class="merch-card-text"><b>Kompostinė žemė universalus Durpeta, 50 l</b></div>
                     </div>
-                    <div class="merch-card">
-                        
+                    <div id="51095186" class="merch-card">
+                        <img src="/img/images/51095186.bmp">
+                        <div class="merch-card-text"><b>Kompostinė žemė universalus Agrochema, 80 l</b></div>
                     </div>
-                    <div class="merch-card">
-                        
+                    <div id="40096710" class="merch-card">
+                        <img src="/img/images/40096710.bmp">
+                        <div class="merch-card-text"><b>Durpių substratas šilauogėms/spanguolėms Garden Center, 80 l</b></div>
                     </div>
+                    <div id="40096711" class="merch-card">
+                        <img src="/img/images/40096711.bmp">
+                        <div class="merch-card-text"><b>Durpių substratas šilauogėms/spanguolėms Garden Center, 200 l</b></div>
+                    </div>
+                    <div id="40096722" class="merch-card">
+                        <img src="/img/images/40096722.bmp">
+                        <div class="merch-card-text"><b>Natūralios durpės universalus Garden Center, 200 l</b></div>
+                    </div>
+                    <div id="40096724" class="merch-card">
+                        <img src="/img/images/40096724.bmp">
+                        <div class="merch-card-text"><b>Neutralizuotos durpės universalus Garden Center, 200 l</b></div>
+                    </div>
+                    
+                    
                 </div>                
             </div>
         </div>
     </div>
 </div>
-<script>
-    document.getElementById("main-merch-cards-link").classList.add("active-link");
-</script>
+
 <%- include("../partials/footer"); %>
+<script>
+
+    document.getElementById("main-merch-cards-link").classList.add("active-link");
+    
+    var cards = $(".merch-card");
+    for(var i = 0; i < cards.length; i++){
+        cards[i].addEventListener("click", (c)=>{
+            var tempText = document.createElement('textarea');
+            tempText.value = c.currentTarget.id;
+            document.body.appendChild(tempText);
+            tempText.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempText);
+            showInfoMessageWindow("Kodas nukopijuotas");
+            setTimeout(hideInfoMessageWindow, 1500);
+        });
+    };
+    for(var i = 0; i < cards.length; i++){
+        cards[i].addEventListener("drag", (c)=>{
+            var tempText = document.createElement('textarea');
+            tempText.value = c.currentTarget.id;
+            document.body.appendChild(tempText);
+            tempText.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempText);
+            showInfoMessageWindow("Kodas nukopijuotas");
+            setTimeout(hideInfoMessageWindow, 1500);
+        });
+    };
+</script>

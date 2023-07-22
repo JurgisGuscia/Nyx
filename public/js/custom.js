@@ -8,6 +8,7 @@ function check() {
       document.getElementById("register-button").disabled = false;
     }
   }
+  
 
   $("#add-new-item-button").on("click", ()=>{
     $("#back-drop").toggleClass("hidden");
@@ -21,6 +22,7 @@ function check() {
     
   });
 
+  
 
   
 
